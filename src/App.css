@@ -25,7 +25,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(10px + 1.5vmin);
   color: #39170F;
   position: relative;
 }
@@ -36,32 +36,29 @@
   top: 0;
   margin-right: 15rem;
   margin-top: 14rem;
+  height: 10vmin;
+  width: 10vmin;
 
 }
 
 .Bee-2 {
-
   position: absolute;
   left: 0;
   top: 0;
   margin-left: 15rem;
-  margin-top: 10rem;
-
-
+  margin-top: 7rem;
+  height: 20vmin;
+  width: 20vmin;
 }
 
 .App-title {
-  text-align: center;
-  margin-top: 3rem;
-  font-size: 3rem;
   font-family: 'Kalam', cursive;
-
 }
 
 .App-intro {
   text-align: center;
-  margin-top: 2rem;
-  font-size: 1.5rem;
+  margin-top: 0.5rem;
+  font-size: 1rem;
   font-family: 'Roboto Flex', sans-serif;
 
 
@@ -77,19 +74,35 @@
   }
 }
 
-
-
-
 .Flowers1 {
   position: absolute;
-  right: -1170px;
-  top: 210px;
+  right: -660px;
+  top: 300px;
   /* or whatever position you want */
+  height: 60vmin;
 }
 
 .Flowers2 {
   position: absolute;
-  left: -1100px;
-  top: 210px;
+  left: -490px;
+  top: 300px;
+  height: 60vmin;
+
   /* or whatever position you want */
+}
+
+.button {
+  background-color: #AD6202;
+  height: 3.5rem;
+  width: 13rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: aliceblue;
+  font-family: 'Roboto Flex', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  border-radius: 30px;
+  margin-top: 6rem;
+  z-index: 1;
 }

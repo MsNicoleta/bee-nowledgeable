@@ -8,19 +8,17 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <div>
 
-          <img src={Bee2} className="Bee-2" alt="bee" />
-          <img src={Bee1} className="Bee-1" alt="bee" />
-          <h1 className="App-title">
-            Bee Knowledgeable
-          </h1>
-          <h3 className="App-intro">Step into the world of bees.
-            <br />Learn all about these beautiful workers that help life flourish.</h3>
-          <img src={Flowers1} className="Flowers1" alt="Flowers-background" />
-          <img src={Flowers2} className="Flowers2" alt="Flowers-background" />
-
-        </div>
+        <img src={Bee2} className="Bee-2" alt="bee" />
+        <img src={Bee1} className="Bee-1" alt="bee" />
+        <h1 className="App-title">
+          Bee Knowledgeable
+        </h1>
+        <h3 className="App-intro">Step into the world of bees.
+          <br />Learn all about these beautiful workers that help life flourish.</h3>
+        <div className='button'>Learn more</div>
+        <img src={Flowers1} className="Flowers1" alt="Flowers-background" />
+        <img src={Flowers2} className="Flowers2" alt="Flowers-background" />
       </header>
     </div>
   );
