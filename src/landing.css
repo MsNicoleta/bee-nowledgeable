@@ -1,6 +1,6 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,300;8..144,400;8..144,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,300;8..144,400;8..144,500&display=swap');
 
-.App {
+.Landing {
   text-align: center;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -87,7 +87,7 @@
   position: absolute;
   right: -560px;
   top: 350px;
-  /* or whatever position you want
+  /* or whatever position you want */
   height: 60vmin;
 }
 
@@ -97,7 +97,7 @@
   top: 350px;
   height: 60vmin;
 
-  /* or whatever position you want
+  /* or whatever position you want */
 }
 
 .button {
@@ -114,4 +114,4 @@
   border-radius: 30px;
   margin-top: 6rem;
   z-index: 1;
-} */
+}
