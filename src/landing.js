@@ -12,21 +12,20 @@ const Landing = () => {
 
 
   return (
-    <div className="Landing">
-      <header className="landing-page">
+    <div className="landing-page">
 
-        <img src={Bee2} className="Bee-2" alt="bee" />
-        <img src={Bee1} className="Bee-1" alt="bee" />
-        <h1 className="landing-title">
-          Bee Knowledgeable
-        </h1>
-        <h3 className="landing-intro">Step into the world of bees.
-          <br />Learn all about these beautiful workers that help life flourish.</h3>
-        <div onClick={() => navigate('/chatbot')} className='button'>Learn more</div>
-        <img src={Flowers1} className="Flowers1" alt="Flowers-background" />
-        <img src={Flowers2} className="Flowers2" alt="Flowers-background" />
-      </header>
+      <img src={Bee2} className="Bee-2" alt="bee" />
+      <img src={Bee1} className="Bee-1" alt="bee" />
+      <h1 className="landing-title">
+        Bee Knowledgeable
+      </h1>
+      <h3 className="landing-intro">Step into the world of bees.
+        <br />Learn all about these beautiful workers that help life flourish.</h3>
+      <div onClick={() => navigate('/chatbot')} className='button'>Learn more</div>
+      <img src={Flowers1} className="Flowers1" alt="Flowers-background" />
+      <img src={Flowers2} className="Flowers2" alt="Flowers-background" />
     </div>
+
   );
 }
 

@@ -1,9 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,300;8..144,400;8..144,500&display=swap');
 
-.App {
+.chatbot-page {
   text-align: center;
   overflow-x: hidden;
   overflow-y: hidden;
+
+  background-color: #DECEA3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: calc(10px + 1.5vmin);
+  color: #39170F;
+  position: relative;
 
 }
 
@@ -35,16 +44,7 @@
   animation: Bee-2-animation 17s infinite linear;
 }
 
-.chatbot-page {
-  background-color: #DECEA3;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: calc(10px + 1.5vmin);
-  color: #39170F;
-  position: relative;
-}
+
 
 .Bee-1 {
   position: absolute;
@@ -66,12 +66,23 @@
 }
 
 
-.AiIcon {
-  position: absolute;
+.chatbot-container {
+  position: fixed;
   left: 0;
   top: 10rem;
-}
+  display: flex;
+  flex-direction: row;
 
+  .chatbot-message {
+    font-family: 'Roboto Flex', sans-serif;
+    position: relative;
+
+  }
+
+  .AiIcon {
+    position: relative;
+  }
+}
 
 .Flowers1 {
   position: absolute;
@@ -83,7 +94,7 @@
 
 
 
-.button {
+.next-message-button {
   background-color: #AD6202;
   height: 3.5rem;
   width: 13rem;
