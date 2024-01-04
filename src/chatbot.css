@@ -3,7 +3,7 @@
 .chatbot-page {
   text-align: center;
   overflow-x: hidden;
-  overflow-y: hidden;
+  overflow-y: auto;
   background-color: #DECEA3;
   min-height: 100vh;
   flex-direction: column;
@@ -67,26 +67,28 @@
 
 .dots {
   width: 3rem;
+  position: absolute;
+
+  top: 7rem;
+  left: 5rem;
 }
 
 .chatbot-container {
   position: absolute !important;
-
   top: 8rem;
   flex-direction: column !important;
   height: 10%;
   margin: 3rem;
-  width: 100% !important;
+  width: 90ch;
 
 }
 
 .AiIcon {
-  position: relative;
+  position: absolute;
   height: 5rem;
   width: 5rem;
-  align-items: end;
-  top: auto;
-  left: auto;
+  top: 5rem;
+  left: 0;
 }
 
 .message-container {
@@ -99,7 +101,7 @@
   align-self: baseline;
   width: 40%;
   z-index: 1;
-  margin-top: 5rem;
+  margin-top: 1rem;
   display: flex;
 }
 
