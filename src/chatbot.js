@@ -87,6 +87,8 @@ const Chatbot = () => {
 
 
 
+
+
   // Function to handle "Next Message" button click
   const handleClick = async () => {
     if (index + 1 < messages.length) {
@@ -105,6 +107,12 @@ const Chatbot = () => {
       console.log('End of messages');
     }
   };
+
+  // Use useEffect to display the first 4 messages
+  useEffect(() => {
+    handleClick();
+  }, []); // Empty dependency array means this effect runs once on mount
+
 
 
 
