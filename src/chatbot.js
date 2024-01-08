@@ -14,6 +14,7 @@ const Chatbot = () => {
   const [messageList, setMessageList] = useState([]);
 
   const messages = [
+    'Bees 🌼🐝',
     'Hey there, curious minds! Lets dive into the world of Bees 🌼🐝',
     'Have you ever wondered about the tiny creatures buzzing around flowers, collecting sweet nectar?',
     'Well, those little superheroes are none other than bees! 🐝 ',
@@ -37,10 +38,7 @@ const Chatbot = () => {
   // Initialize messageCount in state
   const [messageCount, setMessageCount] = useState(0);
 
-
-  // Function to introduce a delay using Promises
-  const delay = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
-
+  const navigate = useNavigate();
   // Effect hook to handle typing animation and message rendering
   useEffect(() => {
     // Asynchronous function to simulate typing each character of a message
@@ -50,7 +48,7 @@ const Chatbot = () => {
         // Check if there are more characters to type in the current message
         if (charIndex < messages[index].length) {
           // Introduce a delay of 30 milliseconds before typing the next character
-          await delay(30);
+          await delay(15);
           // Update the message with the next character
           setMessage((prevMessage) => prevMessage + messages[index][charIndex]);
           // Move to the next character index
@@ -86,7 +84,9 @@ const Chatbot = () => {
   }, [isTyping, index, charIndex, messages, messageCount]);
 
 
-
+  // Function to introduce a delay using Promises
+  // const delay = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
+  const delay = ms => new Promise(res => setTimeout(res, ms));
 
 
   // Function to handle "Next Message" button click
@@ -101,22 +101,22 @@ const Chatbot = () => {
       setMessageCount(prevMessageCount => prevMessageCount + 4);
 
       await delay(3000);
-      setIsTyping(true);
+
     } else {
       // Handle end of messages
       console.log('End of messages');
     }
   };
 
-  // Use useEffect to display the first 4 messages
+
+
+  // Use useEffect to display the second message (index 1)
   useEffect(() => {
+    setIndex(0); // Start from index 1
+    setMessageCount(+1); // Set the total number of messages to 4
     handleClick();
   }, []); // Empty dependency array means this effect runs once on mount
 
-
-
-
-  let navigate = useNavigate();
 
   return (
     <div className="chatbot-page">
@@ -128,21 +128,22 @@ const Chatbot = () => {
       <img src={AiIcon} className="AiIcon" alt="AiIcon" />
       {isTyping ? <img src={Dots} className="dots" alt="Dots" /> : null}
       <div className="chatbot-container">
+        {/* {isTyping ? <img src={Dots} className="dots" alt="Dots" /> : null} */}
         {messageList.map((msg, idx) => (
-          <div key={idx} className="message-container">
+          <div key={idx} className="message-container" style={{ maxWidth: `${msg.length * 10}px` }}>
             <p className="chatbot-message">{msg}</p>
           </div>
         ))}
         {message.trim() !== '' && (
-          <div className="message-container">
+          <div className="message-container" style={{ maxWidth: `${message.length * 10}px` }}>
+
             <p className="chatbot-message">{message}</p>
           </div>
         )}
+        <button className="next-message-button" onClick={handleClick}>
+          Next Message
+        </button>
       </div>
-      {isTyping ? <img src={Dots} className="dots" alt="Dots" /> : null}
-      <button className="next-message-button" onClick={handleClick}>
-        Next Message
-      </button>
     </div>
   );
 };
