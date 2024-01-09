@@ -1,21 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,300;8..144,400;8..144,500&display=swap');
 
-.landing-page {
-  text-align: center;
-  overflow-x: hidden;
-  overflow-y: hidden;
 
-  background-color: #DECEA3;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 1.5vmin);
-  color: #39170F;
-  position: relative;
-
-}
 
 @keyframes Bee-1-animation {
   0% {
@@ -25,6 +10,10 @@
   100% {
     transform: rotate(-360deg) translateX(30px) rotate(360deg);
   }
+}
+
+.Bee-1 {
+  animation: Bee-1-animation 16s infinite linear;
 }
 
 @keyframes Bee-2-animation {
@@ -37,9 +26,7 @@
   }
 }
 
-.Bee-1 {
-  animation: Bee-1-animation 16s infinite linear;
-}
+
 
 .Bee-2 {
   animation: Bee-2-animation 17s infinite linear;
@@ -49,10 +36,8 @@
 
 .Bee-1 {
   position: absolute;
-  right: 0;
-  top: 0;
-  margin-right: 15rem;
-  margin-top: 14rem;
+  right: 25%;
+  top: 10%;
   height: 10vmin;
   width: 10vmin;
 
@@ -60,12 +45,11 @@
 
 .Bee-2 {
   position: absolute;
-  left: 0;
-  top: 0;
-  margin-left: 15rem;
-  margin-top: 7rem;
-  height: 20vmin;
-  width: 20vmin;
+  left: 25%;
+  top: 20%;
+
+  height: 15vmin;
+  width: 15vmin;
 }
 
 .landing-title {
@@ -81,23 +65,92 @@
 
 }
 
-
-
-.Flowers1 {
-  position: absolute;
-  right: -560px;
-  top: 350px;
-  /* or whatever position you want */
-  height: 60vmin;
+.landing-page {
+  text-align: center;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  width: 100%;
+  background-color: #DECEA3;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 1.5vmin);
+  color: #39170F;
+  position: relative;
+  z-index: 0;
 }
 
-.Flowers2 {
-  position: absolute;
-  left: -490px;
-  top: 350px;
-  height: 60vmin;
+@keyframes BFlowers1-animation {
+  0% {
+    transform: translate(0%, 20%) rotate(-10deg);
+    opacity: 0;
+  }
 
-  /* or whatever position you want */
+  90% {
+    transform: translate(10%, 0) rotate(0deg);
+    opacity: 0.7;
+    /* Adjust the opacity as needed */
+  }
+
+  100% {
+    transform: translate(10%, 0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.landing-page-Flowers1 {
+  position: absolute;
+  bottom: -50px;
+  left: 35%;
+  height: 50vmin;
+  animation: BFlowers1-animation 2s ease-in-out forwards;
+  z-index: auto;
+}
+
+@keyframes BFlowers2-animation {
+  0% {
+    transform: translate(0%, 20%) rotate(10deg);
+    opacity: 0;
+  }
+
+  90% {
+    transform: translate(-10%, 0) rotate(0deg);
+    opacity: 0.7;
+    /* Adjust the opacity as needed */
+  }
+
+  100% {
+    transform: translate(-10%, 0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.landing-page-Flowers2 {
+  position: absolute;
+  bottom: -50px;
+  right: 45%;
+  height: 50vmin;
+  animation: BFlowers2-animation 2s ease-in-out forwards;
+  z-index: auto;
+}
+
+/* Media Query for Small Screens */
+@media screen and (max-width: 600px) {
+
+  .Flowers1,
+  .Flowers2 {
+    left: auto;
+    right: auto;
+  }
+
+  .Bee-1,
+  .Bee-2 {
+
+    left: auto;
+    right: auto;
+  }
 }
 
 .button {
@@ -113,6 +166,6 @@
   font-size: 1rem;
   border-radius: 30px;
   margin-top: 6rem;
-  z-index: 1;
+  z-index: 2;
   cursor: pointer;
 }

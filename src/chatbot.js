@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Bee1 from './img/Bee1.png';
-import Flowers1 from './img/Flowers1.png';
+import chatbotBee1 from './img/Bee1.png';
+import Flowers2 from './img/Flowers2.png';
 import AiIcon from './img/AI-Icon.svg';
 import Dots from './img/dot.svg';
 import './chatbot.css';
@@ -120,31 +120,37 @@ const Chatbot = () => {
 
   return (
     <div className="chatbot-page">
-      <img src={Bee1} className="Bee-1" alt="bee" />
+      <img src={chatbotBee1} className=".chatbot-Bee-1" alt="bee" />
       <h3 onClick={() => navigate('/landing')} className="chatbot-title">
         Bee Knowledgeable
       </h3>
-      <img src={Flowers1} className="Flowers1" alt="Flowers-background" />
-      <img src={AiIcon} className="AiIcon" alt="AiIcon" />
-      {isTyping ? <img src={Dots} className="dots" alt="Dots" /> : null}
-      <div className="chatbot-container">
-        {/* {isTyping ? <img src={Dots} className="dots" alt="Dots" /> : null} */}
-        {messageList.map((msg, idx) => (
-          <div key={idx} className="message-container" style={{ maxWidth: `${msg.length * 10}px` }}>
-            <p className="chatbot-message">{msg}</p>
-          </div>
-        ))}
-        {message.trim() !== '' && (
-          <div className="message-container" style={{ maxWidth: `${message.length * 10}px` }}>
+      <img src={Flowers2} className="chatbot-page-Flowers2" alt="Flowers-background" />
+      <div className='chatbot'>
+        <img src={AiIcon} className="AiIcon" alt="AiIcon" />
+        {isTyping ? <img src={Dots} className="dots" alt="Dots" /> : null}
+        <div className="messages-display-container">
+          {/* {isTyping ? <img src={Dots} className="dots" alt="Dots" /> : null} */}
+          {messageList.map((msg, idx) => (
+            <div key={idx} className="new-message-container" style={{ maxWidth: `${msg.length * 10}px` }}>
+              <p className="chatbot-message">{msg}</p>
+            </div>
+          ))}
+          {message.trim() !== '' && (
+            <div className="new-message-container" style={{ maxWidth: `${message.length * 10}px` }}>
 
-            <p className="chatbot-message">{message}</p>
-          </div>
-        )}
+              <p className="chatbot-message">{message}</p>
+            </div>
+          )}
+        </div>
+      </div>
+      <div>
         <button className="next-message-button" onClick={handleClick}>
           Next Message
         </button>
       </div>
-    </div>
+
+
+    </div >
   );
 };
 

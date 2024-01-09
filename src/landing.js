@@ -22,8 +22,8 @@ const Landing = () => {
       <h3 className="landing-intro">Step into the world of bees.
         <br />Learn all about these beautiful workers that help life flourish.</h3>
       <div onClick={() => navigate('/chatbot')} className='button'>Learn more</div>
-      <img src={Flowers1} className="Flowers1" alt="Flowers-background" />
-      <img src={Flowers2} className="Flowers2" alt="Flowers-background" />
+      <img src={Flowers1} className="landing-page-Flowers1" alt="Flowers-background" />
+      <img src={Flowers2} className="landing-page-Flowers2" alt="Flowers-background" />
     </div>
 
   );
