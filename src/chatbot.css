@@ -44,28 +44,40 @@
 }
 
 
-
 @keyframes chatbot-Bee-1-animation {
   0% {
-    transform: rotate(0deg) translateX(30px) rotate(0deg);
+    transform: rotate(20deg) translateX(40%) rotate(10deg);
+  }
+
+  20% {
+    transform: rotate(30deg) translateX(50%) rotate(5deg);
+  }
+
+  40% {
+    transform: rotate(45deg) translateX(70%) rotate(-10deg);
+  }
+
+  60% {
+    transform: rotate(-15deg) translateX(80%) rotate(20deg);
+  }
+
+  80% {
+    transform: rotate(10deg) translateX(110%) rotate(5deg);
   }
 
   100% {
-    transform: rotate(-360deg) translateX(30px) rotate(360deg);
+    transform: rotate(20deg) translateX(40%) rotate(10deg);
   }
 }
 
-
 .chatbot-Bee-1 {
   position: absolute;
-  right: 0;
-  top: 0;
-  margin-right: 15rem;
-  margin-top: 14rem;
-  height: 10vmin;
-  width: 10vmin;
+  right: 25%;
+  top: 10%;
+  height: 5vmin;
+  width: 5vmin;
   z-index: 1;
-  animation: chatbot-Bee-1-animation 16s infinite linear;
+  animation: chatbot-Bee-1-animation 17s ease-in-out infinite forwards;
 }
 
 /* .Bee-2 {

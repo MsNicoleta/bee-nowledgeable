@@ -120,10 +120,10 @@ const Chatbot = () => {
 
   return (
     <div className="chatbot-page">
-      <img src={chatbotBee1} className=".chatbot-Bee-1" alt="bee" />
       <h3 onClick={() => navigate('/landing')} className="chatbot-title">
         Bee Knowledgeable
       </h3>
+      <img src={chatbotBee1} className="chatbot-Bee-1" alt="bee" />
       <img src={Flowers2} className="chatbot-page-Flowers2" alt="Flowers-background" />
       <div className='chatbot'>
         <img src={AiIcon} className="AiIcon" alt="AiIcon" />

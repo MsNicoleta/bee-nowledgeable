@@ -1,6 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,300;8..144,400;8..144,500&display=swap');
 
 
+@keyframes Bee-1-opacity {
+  0% {
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
 
 @keyframes Bee-1-animation {
   0% {
@@ -13,7 +42,30 @@
 }
 
 .Bee-1 {
-  animation: Bee-1-animation 16s infinite linear;
+  position: absolute;
+  right: 25%;
+  top: 10%;
+  height: 10vmin;
+  width: 10vmin;
+  opacity: 0;
+  /* Initial opacity before animation starts */
+  animation: Bee-1-opacity 2s forwards, Bee-1-animation 16s infinite linear;
+  animation-delay: 1s;
+  /* Delay of 1 second before starting animation */
+}
+
+@keyframes Bee-2-opacity {
+  0% {
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes Bee-2-animation {
@@ -26,31 +78,25 @@
   }
 }
 
-
-
-.Bee-2 {
-  animation: Bee-2-animation 17s infinite linear;
-}
-
-
-
-.Bee-1 {
-  position: absolute;
-  right: 25%;
-  top: 10%;
-  height: 10vmin;
-  width: 10vmin;
-
-}
-
 .Bee-2 {
   position: absolute;
   left: 25%;
   top: 20%;
-
   height: 15vmin;
   width: 15vmin;
+  opacity: 0;
+  /* Initial opacity before animation starts */
+  animation: Bee-2-opacity 2s forwards, Bee-2-animation 17s infinite linear;
+  animation-delay: 1s;
+  /* Delay of 1 second before starting animation */
 }
+
+
+
+
+
+
+
 
 .landing-title {
   font-family: 'Kalam', cursive;
