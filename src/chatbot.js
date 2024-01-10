@@ -22,6 +22,7 @@ const Chatbot = () => {
   const [isTyping, setIsTyping] = useState(true);
   const [charIndex, setCharIndex] = useState(0);
   const [messageList, setMessageList] = useState([]);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
 
 
@@ -29,9 +30,9 @@ const Chatbot = () => {
   const messages = [
     'Bees 🌼🐝',
     'Hey there, curious minds! Lets dive into the world of Bees 🌼🐝🌻',
-    '/src/Video/bee_farm.mp4',
+    './Video/bee_farm.mp4',
     'Have you ever wondered about the tiny creatures buzzing around flowers, collecting sweet nectar?',
-    '/src/Video/bee_pollinating.mp4',
+    './Video/bee_pollinating.mp4',
     'Well, those little superheroes are none other than bees! 🐝 ',
     'Let\'s embark on a buzzing adventure to discover why these tiny creatures are so important.',
     'Bees are not just cute and fuzzy insects; they play a crucial role in our world.',
@@ -47,13 +48,46 @@ const Chatbot = () => {
     'Keep on buzzing with curiosity, and let\'s continue learning about the amazing world of bees! 🐝✨'
 
   ];
-  console.log(messages);
+
+  const handleVideoPlay = () => {
+    setIsVideoPlaying(true);
+  };
+
+  const handleVideoPause = () => {
+    setIsVideoPlaying(false);
+  };
+  // console.log(messages);
   console.log(messageList);
   // Initialize messageCount in state
   const [messageCount, setMessageCount] = useState(0);
 
   const navigate = useNavigate();
-  // Effect hook to handle typing animation and message rendering
+  useEffect(() => {
+    const messageContainer = document.querySelector('.messages-display-container');
+    messageContainer.addEventListener('scroll', handleScroll);
+    return () => {
+      messageContainer.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const typeMessageWrapper = async () => {
+      await typeMessage();
+    };
+    typeMessageWrapper();
+  }, [isTyping, index, charIndex, messages, messageCount]);
+
+  useEffect(() => {
+    const lastMessageElement = document.querySelector('.new-message-container:last-child');
+    lastMessageElement?.scrollIntoView({ behavior: 'smooth' });
+  }, [messageList]);
+
+  useEffect(() => {
+    setIndex(0);
+    setMessageCount((prevCount) => prevCount + 4);
+    typeMessage();
+  }, []);
+
 
   let videoArray = messages.filter(item => item.endsWith('.mp4'));
 
@@ -63,7 +97,7 @@ const Chatbot = () => {
       if (item.endsWith('.mp4')) {
         return (
           <video key={index} width="320" height="240" controls>
-            <source src={item} type="video/.mp4" />
+            <source src={item} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         );
@@ -110,31 +144,6 @@ const Chatbot = () => {
     }
   };
 
-  useEffect(() => {
-    const messageContainer = document.querySelector('.messages-display-container');
-    messageContainer.addEventListener('scroll', handleScroll);
-    return () => {
-      messageContainer.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
-    const typeMessageWrapper = async () => {
-      await typeMessage();
-    };
-    typeMessageWrapper();
-  }, [isTyping, index, charIndex, messages, messageCount]);
-
-  useEffect(() => {
-    const lastMessageElement = document.querySelector('.new-message-container:last-child');
-    lastMessageElement?.scrollIntoView({ behavior: 'smooth' });
-  }, [messageList]);
-
-  useEffect(() => {
-    setIndex(0);
-    setMessageCount((prevCount) => prevCount + 4);
-    typeMessage();
-  }, []);
 
   const handleClick = async () => {
     if (index + 1 < messages.length) {
@@ -150,44 +159,49 @@ const Chatbot = () => {
   };
   return (
     <div className="chatbot-page">
-      <h3 onClick={() => navigate('/landing')} className="chatbot-title">
-        Bee Knowledgeable
-      </h3>
-      <img src={chatbotBee1} className="chatbot-Bee-1" alt="bee" />
-      <img src={Flowers2} className="chatbot-page-Flowers2" alt="Flowers-background" />
-      <div className='chatbot'>
-        <img src={AiIcon} className="AiIcon" alt="AiIcon" />
-        {isTyping ? <img src={Dots} className="dots" alt="Dots" /> : null}
-        <div className="messages-display-container" style={{ overflowY: 'scroll' }}>
-          {messageList.map((item, index) => {
-            if (item.endsWith('.mp4')) {
-              return (
-                <div key={index} className="new-message-container" style={{ maxWidth: `${item.length * 14}px` }}>
-                  <video width="320" height="240" controls autoplay>
-                    <source src={item} type="video/.mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-              );
-            } else {
-              return (
-                <div key={index} className="new-message-container" style={{ maxWidth: `${item.length * 10}px` }}>
-                  <p className="chatbot-message">{item}</p>
-                </div>
-              );
-            }
-          })}
-          {message.trim() !== '' && (
-            <div className="new-message-container" style={{ maxWidth: `${message.length * 10}px` }}>
-              <p className="chatbot-message">{message}</p>
-            </div>
-          )}
-        </div>
-        <div>
+      {/* ... (other elements) */}
+      <div className="messages-display-container" style={{ overflowY: 'scroll' }}>
+        {messageList.map((item, index) => {
+          if (item.endsWith('.mp4')) {
+            return (
+              <div key={index} className="new-message-container">
+                <video
+                  key={`video-${index}`}
+                  width="320"
+                  height="240"
+                  controls
+                  autoPlay
+                  muted  // Add this line
+                  onPlay={handleVideoPlay}
+                  onPause={handleVideoPause}
+                >
+                  <source src={item} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            );
+          } else {
+            return (
+              <div key={index} className="new-message-container" style={{ maxWidth: `${item.length * 10}px` }}>
+                <p className="chatbot-message">{item}</p>
+              </div>
+            );
+          }
+        })}
+        {message.trim() !== '' && (
+          <div className="new-message-container" style={{ maxWidth: `${message.length * 10}px` }}>
+            <p className="chatbot-message">{message}</p>
+          </div>
+        )}
+      </div>
+      <div>
+        {isVideoPlaying ? (
+          <p>Video is playing!</p>
+        ) : (
           <button className="next-message-button" onClick={handleClick}>
             Next Message
           </button>
-        </div>
+        )}
       </div>
     </div>
   );
