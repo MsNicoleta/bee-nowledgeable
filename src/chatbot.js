@@ -6,6 +6,13 @@ import AiIcon from './img/AI-Icon.svg';
 import Dots from './img/dot.svg';
 import './chatbot.css';
 
+
+const Message = ({ content, isLast }) => (
+  <div className={`new-message-container ${isLast ? 'fade' : ''}`} style={{ maxWidth: `${content.length * 10}px` }}>
+    <p className="chatbot-message">{content}</p>
+  </div>
+);
+
 const Chatbot = () => {
   const [index, setIndex] = useState(0);
   const [message, setMessage] = useState('');
@@ -15,7 +22,7 @@ const Chatbot = () => {
 
   const messages = [
     'Bees 🌼🐝',
-    'Hey there, curious minds! Lets dive into the world of Bees 🌼🐝',
+    'Hey there, curious minds! Lets dive into the world of Bees 🌼🐝🌻',
     'Have you ever wondered about the tiny creatures buzzing around flowers, collecting sweet nectar?',
     'Well, those little superheroes are none other than bees! 🐝 ',
     'Let\'s embark on a buzzing adventure to discover why these tiny creatures are so important.',
@@ -40,83 +47,82 @@ const Chatbot = () => {
 
   const navigate = useNavigate();
   // Effect hook to handle typing animation and message rendering
-  useEffect(() => {
-    // Asynchronous function to simulate typing each character of a message
-    const typeMessage = async () => {
-      // Check if the typing animation is active
-      if (isTyping) {
-        // Check if there are more characters to type in the current message
-        if (charIndex < messages[index].length) {
-          // Introduce a delay of 30 milliseconds before typing the next character
-          await delay(15);
-          // Update the message with the next character
-          setMessage((prevMessage) => prevMessage + messages[index][charIndex]);
-          // Move to the next character index
-          setCharIndex((prevCharIndex) => prevCharIndex + 1);
+
+  const handleScroll = (e) => {
+    const { scrollTop, scrollHeight, clientHeight } = e.target;
+    const scrolled = scrollTop / (scrollHeight - clientHeight);
+    const messageElements = document.querySelectorAll('.new-message-container');
+    messageElements.forEach((el, idx) => {
+      el.style.opacity = Math.min(Math.max((idx / messageList.length) - scrolled + 0.1, 0), 1);
+    });
+  };
+
+  const delay = (ms) => new Promise(res => setTimeout(res, ms));
+
+  const typeMessage = async () => {
+    if (isTyping) {
+      if (charIndex < messages[index].length) {
+        await delay(15);
+        setMessage((prevMessage) => prevMessage + messages[index][charIndex]);
+        setCharIndex((prevCharIndex) => prevCharIndex + 1);
+      } else {
+        setIsTyping(false);
+
+        if (messages[index].trim() !== '') {
+          setMessageList((prevMessageList) => [...prevMessageList, messages[index]]);
+        }
+
+        setMessage('');
+
+        if (index < messageCount - 1) {
+          setIndex((prevIndex) => prevIndex + 1);
+          setIsTyping(true);
+          setCharIndex(0);
         } else {
-          // Typing animation is complete for the current message
           setIsTyping(false);
-
-          // Check if the message is not empty and add it to the list of displayed messages
-          if (messages[index].trim() !== '') {
-            setMessageList((prevMessageList) => [...prevMessageList, messages[index]]);
-          }
-
-          // Reset the message state
-          setMessage('');
-
-          // Check if there are more messages to display
-          if (index < messageCount - 1) {
-            // Move to the next message, re-enable typing animation, and reset character index
-            setIndex((prevIndex) => prevIndex + 1);
-            setIsTyping(true);
-            setCharIndex(0);
-          } else {
-            // No more messages to display, disable typing animation
-            setIsTyping(false);
-          }
         }
       }
-    };
+    }
+  };
 
-    // Call the typing animation function
-    typeMessage();
+  useEffect(() => {
+    const messageContainer = document.querySelector('.messages-display-container');
+    messageContainer.addEventListener('scroll', handleScroll);
+    return () => {
+      messageContainer.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  useEffect(() => {
+    const typeMessageWrapper = async () => {
+      await typeMessage();
+    };
+    typeMessageWrapper();
   }, [isTyping, index, charIndex, messages, messageCount]);
 
+  useEffect(() => {
+    const lastMessageElement = document.querySelector('.new-message-container:last-child');
+    lastMessageElement?.scrollIntoView({ behavior: 'smooth' });
+  }, [messageList]);
 
-  // Function to introduce a delay using Promises
-  // const delay = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
-  const delay = ms => new Promise(res => setTimeout(res, ms));
+  useEffect(() => {
+    setIndex(0);
+    setMessageCount((prevCount) => prevCount + 4);
+    typeMessage();
+  }, []);
 
-
-  // Function to handle "Next Message" button click
   const handleClick = async () => {
     if (index + 1 < messages.length) {
       setIsTyping(true);
       setIndex((prevIndex) => prevIndex + 1);
       setCharIndex(0);
       setMessage('');
-
-      // Increment messageCount for every click
-      setMessageCount(prevMessageCount => prevMessageCount + 4);
-
+      setMessageCount((prevCount) => prevCount + 4);
       await delay(3000);
-
     } else {
-      // Handle end of messages
       console.log('End of messages');
     }
   };
-
-
-
-  // Use useEffect to display the second message (index 1)
-  useEffect(() => {
-    setIndex(0); // Start from index 1
-    setMessageCount(+1); // Set the total number of messages to 4
-    handleClick();
-  }, []); // Empty dependency array means this effect runs once on mount
-
 
   return (
     <div className="chatbot-page">
@@ -127,20 +133,10 @@ const Chatbot = () => {
       <img src={Flowers2} className="chatbot-page-Flowers2" alt="Flowers-background" />
       <div className='chatbot'>
         <img src={AiIcon} className="AiIcon" alt="AiIcon" />
-        {isTyping ? <img src={Dots} className="dots" alt="Dots" /> : null}
-        <div className="messages-display-container">
-          {/* {isTyping ? <img src={Dots} className="dots" alt="Dots" /> : null} */}
-          {messageList.map((msg, idx) => (
-            <div key={idx} className="new-message-container" style={{ maxWidth: `${msg.length * 10}px` }}>
-              <p className="chatbot-message">{msg}</p>
-            </div>
-          ))}
-          {message.trim() !== '' && (
-            <div className="new-message-container" style={{ maxWidth: `${message.length * 10}px` }}>
-
-              <p className="chatbot-message">{message}</p>
-            </div>
-          )}
+        {isTyping && <img src={Dots} className="dots" alt="Dots" />}
+        <div className="messages-display-container" style={{ overflowY: 'scroll' }}>
+          {messageList.map((msg, idx) => <Message key={idx} content={msg} isLast={idx < messageList.length - 4 && messageList.length >= 4} />)}
+          {message.trim() !== '' && <Message content={message} />}
         </div>
       </div>
       <div>
@@ -148,10 +144,9 @@ const Chatbot = () => {
           Next Message
         </button>
       </div>
-
-
-    </div >
+    </div>
   );
 };
+
 
 export default Chatbot;
