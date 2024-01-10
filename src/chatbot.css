@@ -40,7 +40,7 @@
   left: 35%;
   height: 50vmin;
   animation: chatbot-page-BFlowers2-animation 2s ease-in-out forwards;
-  z-index: auto;
+  z-index: 1;
 }
 
 
@@ -141,7 +141,7 @@
   font-weight: 600;
   font-size: 1rem;
   border-radius: 30px;
-  z-index: 3;
+  z-index: 10 !important;
   margin-top: 10rem;
   margin-bottom: 10rem;
   cursor: pointer;
