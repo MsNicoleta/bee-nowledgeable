@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import chatbotBee1 from './img/Bee1.png';
 import Flowers2 from './img/Flowers2.png';
 import AiIcon from './img/AI-Icon.svg';
+import BeesFarm from './Video/bee_farm.mp4';
+import BeePolinators from './Video/bee_pollinating.mp4';
 import Dots from './img/dot.svg';
 import './chatbot.css';
 
@@ -13,6 +15,7 @@ const Message = ({ content, isLast }) => (
   </div>
 );
 
+
 const Chatbot = () => {
   const [index, setIndex] = useState(0);
   const [message, setMessage] = useState('');
@@ -20,10 +23,15 @@ const Chatbot = () => {
   const [charIndex, setCharIndex] = useState(0);
   const [messageList, setMessageList] = useState([]);
 
+
+
+
   const messages = [
     'Bees 🌼🐝',
     'Hey there, curious minds! Lets dive into the world of Bees 🌼🐝🌻',
+    '/src/Video/bee_farm.mp4',
     'Have you ever wondered about the tiny creatures buzzing around flowers, collecting sweet nectar?',
+    '/src/Video/bee_pollinating.mp4',
     'Well, those little superheroes are none other than bees! 🐝 ',
     'Let\'s embark on a buzzing adventure to discover why these tiny creatures are so important.',
     'Bees are not just cute and fuzzy insects; they play a crucial role in our world.',
@@ -31,7 +39,6 @@ const Chatbot = () => {
     'Bees help plants make seeds by carrying pollen from one flower to another, helping them grow and reproduce.',
     'Nice to meet you!',
     'In fact, one out of every three bites of food you eat is thanks to a bee!',
-    'video playing',
     'But bees aren\'t just busy at work; they\'re also part of a big team.',
     'Honeybees, for example, live in colonies and work together to build hives, gather food, and take care of their queen. ',
     'Teamwork makes the dream work, right?',
@@ -48,12 +55,30 @@ const Chatbot = () => {
   const navigate = useNavigate();
   // Effect hook to handle typing animation and message rendering
 
+  let videoArray = messages.filter(item => item.endsWith('.mp4'));
+
+  // In your component render method:
+  {
+    messages.map((item, index) => {
+      if (item.endsWith('.mp4')) {
+        return (
+          <video key={index} width="320" height="240" controls>
+            <source src={item} type="video/.mp4" />
+            Your browser does not support the video tag.
+          </video>
+        );
+      } else {
+        return <p key={index}>{item}</p>;
+      }
+    })
+  }
+  console.log(videoArray);
   const handleScroll = (e) => {
     const { scrollTop, scrollHeight, clientHeight } = e.target;
     const scrolled = scrollTop / (scrollHeight - clientHeight);
     const messageElements = document.querySelectorAll('.new-message-container');
     messageElements.forEach((el, idx) => {
-      el.style.opacity = Math.min(Math.max((idx / messageList.length) - scrolled + 0.1, 0), 1);
+      el.style.opacity = Math.min(Math.max((idx / messageList.length) - scrolled + 0.5, 0), 1);
     });
   };
 
@@ -123,7 +148,6 @@ const Chatbot = () => {
       console.log('End of messages');
     }
   };
-
   return (
     <div className="chatbot-page">
       <h3 onClick={() => navigate('/landing')} className="chatbot-title">
@@ -133,19 +157,42 @@ const Chatbot = () => {
       <img src={Flowers2} className="chatbot-page-Flowers2" alt="Flowers-background" />
       <div className='chatbot'>
         <img src={AiIcon} className="AiIcon" alt="AiIcon" />
-        {isTyping && <img src={Dots} className="dots" alt="Dots" />}
+        {isTyping ? <img src={Dots} className="dots" alt="Dots" /> : null}
         <div className="messages-display-container" style={{ overflowY: 'scroll' }}>
-          {messageList.map((msg, idx) => <Message key={idx} content={msg} isLast={idx < messageList.length - 4 && messageList.length >= 4} />)}
-          {message.trim() !== '' && <Message content={message} />}
+          {messageList.map((item, index) => {
+            if (item.endsWith('.mp4')) {
+              return (
+                <div key={index} className="new-message-container" style={{ maxWidth: `${item.length * 14}px` }}>
+                  <video width="320" height="240" controls autoplay>
+                    <source src={item} type="video/.mp4" />
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+              );
+            } else {
+              return (
+                <div key={index} className="new-message-container" style={{ maxWidth: `${item.length * 10}px` }}>
+                  <p className="chatbot-message">{item}</p>
+                </div>
+              );
+            }
+          })}
+          {message.trim() !== '' && (
+            <div className="new-message-container" style={{ maxWidth: `${message.length * 10}px` }}>
+              <p className="chatbot-message">{message}</p>
+            </div>
+          )}
         </div>
-      </div>
-      <div>
-        <button className="next-message-button" onClick={handleClick}>
-          Next Message
-        </button>
+        <div>
+          <button className="next-message-button" onClick={handleClick}>
+            Next Message
+          </button>
+        </div>
       </div>
     </div>
   );
+  console.log(videoArray)
+
 };
 
 
