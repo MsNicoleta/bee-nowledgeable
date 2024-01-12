@@ -40,7 +40,7 @@
   left: 45%;
   height: 60vmin;
   animation: chatbot-page-BFlowers2-animation 1s ease-in-out forwards;
-  z-index: auto;
+  z-index: 0;
 }
 
 
@@ -116,9 +116,10 @@
   flex-direction: column !important;
   margin-left: 5rem;
   z-index: 0;
-  height: 30rem;
+  height: 23rem;
   /* Adjust this value as needed */
-
+  overflow-y: auto;
+  /* Add this line to enable vertical scrolling */
 }
 
 .fade {
@@ -126,16 +127,18 @@
   transition: opacity 0.5s ease-in-out;
 }
 
+
 .new-message-container {
   background-color: rgb(255, 253, 240);
   color: #39170F;
-  padding: 6px;
-  margin: 5px;
-  border-radius: 15px;
-  max-width: 90%;
-  /* Let the width be determined by the content */
+  padding: 12px;
+  margin: 16px;
+  border-radius: 39px;
+  max-width: 80%;
   z-index: 2;
+  text-align: left;
 }
+
 
 .next-message-button {
   background-color: #AD6202;
@@ -150,14 +153,37 @@
   font-size: 1rem;
   border-radius: 30px;
   z-index: 10 !important;
+  /* Increased z-index */
+  position: relative;
+  /* Ensure it's positioned */
   margin-top: 10rem;
   margin-bottom: 10rem;
   cursor: pointer;
   border: none !important;
 }
 
+
 p {
   display: block;
   margin-block-start: 0.5rem;
   margin-block-end: 0.5rem;
+}
+
+
+
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0.5;
+  }
+}
+
+.fade-out {
+  animation-name: fadeOut;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
 }
