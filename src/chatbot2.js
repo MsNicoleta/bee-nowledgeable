@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import chatbotBee1 from './img/Bee1.png';
 import Flowers2 from './img/Flowers2.png';
 import AiIcon from './img/AI-Icon.svg';
-import BeesFarm from './Video/bee_farm.mp4';
-import BeePolinators from './Video/bee_pollinating.mp4';
+
 import Dots from './img/dot.svg';
 import './chatbot.css';
 
@@ -28,24 +27,14 @@ const Chatbot = () => {
 
 
   const messages = [
-    'Bees 🌼🐝',
+
     'Hey there, curious minds! Lets dive into the world of Bees 🌼🐝🌻',
     './Video/bee_farm.mp4',
     'Have you ever wondered about the tiny creatures buzzing around flowers, collecting sweet nectar?',
     './Video/bee_pollinating.mp4',
     'Well, those little superheroes are none other than bees! 🐝 ',
     'Let\'s embark on a buzzing adventure to discover why these tiny creatures are so important.',
-    'Bees are not just cute and fuzzy insects; they play a crucial role in our world.',
-    'You see, bees are fantastic pollinators.',
-    'Bees help plants make seeds by carrying pollen from one flower to another, helping them grow and reproduce.',
-    'Nice to meet you!',
-    'In fact, one out of every three bites of food you eat is thanks to a bee!',
-    'But bees aren\'t just busy at work; they\'re also part of a big team.',
-    'Honeybees, for example, live in colonies and work together to build hives, gather food, and take care of their queen. ',
-    'Teamwork makes the dream work, right?',
-    'So, next time you see a bee buzzing by, remember to say a little thank you!',
-    'They might be small, but they sure do a big job in keeping our planet blooming and delicious. 🌸🍯',
-    'Keep on buzzing with curiosity, and let\'s continue learning about the amazing world of bees! 🐝✨'
+
 
   ];
 
@@ -91,7 +80,21 @@ const Chatbot = () => {
 
   let videoArray = messages.filter(item => item.endsWith('.mp4'));
 
-
+  // In your component render method:
+  {
+    messages.map((item, index) => {
+      if (item.endsWith('.mp4')) {
+        return (
+          <video key={index} width="320" height="240" controls>
+            <source src={item} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        );
+      } else {
+        return <p key={index}>{item}</p>;
+      }
+    })
+  }
   console.log(videoArray);
   const handleScroll = (e) => {
     const { scrollTop, scrollHeight, clientHeight } = e.target;
@@ -119,16 +122,21 @@ const Chatbot = () => {
 
         setMessage('');
 
-        if (index < messageCount - 1) {
+        // Check if the current index is less than messageCount + 4
+        if (index < messageCount + 3) {
+          // If it is, increment the index and start typing the next message
           setIndex((prevIndex) => prevIndex + 1);
           setIsTyping(true);
           setCharIndex(0);
         } else {
+          // If it's not, stop typing until the button is clicked
           setIsTyping(false);
         }
       }
     }
   };
+
+
 
 
   const handleClick = async () => {
@@ -157,7 +165,7 @@ const Chatbot = () => {
                   height="240"
                   controls
                   autoPlay
-                  muted  // Add this line
+                  muted
                   onPlay={handleVideoPlay}
                   onPause={handleVideoPause}
                 >
@@ -191,8 +199,6 @@ const Chatbot = () => {
       </div>
     </div>
   );
-  console.log(videoArray)
-
 };
 
 

@@ -17,7 +17,6 @@ const Chatbot = () => {
   const [messageCount, setMessageCount] = useState(0);
 
   const messages = [
-
     'Hey there, curious minds! Lets dive into the world of Bees 🌼🐝🌻',
     './Video/bee_farm.mp4',
     'Have you ever wondered about the tiny creatures buzzing around flowers, collecting sweet nectar?',
@@ -42,104 +41,117 @@ const Chatbot = () => {
 
   const handleVideoPlay = () => {
     setIsVideoPlaying(true);
+    console.log('The video started playing');
+
   };
 
   const handleVideoPause = () => {
+    console.log('The video was paused');
+
     setIsVideoPlaying(false);
   };
+  // console.log(messages);
+  console.log(messageList);
+  // Initialize messageCount in state
 
   const navigate = useNavigate();
+  useEffect(() => {
+    const messageContainer = document.querySelector('.messages-display-container');
+    messageContainer.addEventListener('scroll', handleScroll);
+    return () => {
+      messageContainer.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
-    // Asynchronous function to simulate typing each character of a message
-    const typeMessage = async () => {
-      // Check if the typing animation is active
-      if (isTyping) {
-        // Check if there are more characters to type in the current message
-        if (charIndex < messages[index].length) {
-          // Introduce a delay of 30 milliseconds before typing the next character
-          await delay(15);
-          // Update the message with the next character
-          setMessage((prevMessage) => prevMessage + messages[index][charIndex]);
-          // Move to the next character index
-          setCharIndex((prevCharIndex) => prevCharIndex + 1);
+    const typeMessageWrapper = async () => {
+      await typeMessage();
+    };
+    typeMessageWrapper();
+  }, [isTyping, index, charIndex, messages, messageCount]);
+
+  useEffect(() => {
+    const lastMessageElement = document.querySelector('.new-message-container:last-child');
+    lastMessageElement?.scrollIntoView({ behavior: 'smooth' });
+  }, [messageList]);
+
+  useEffect(() => {
+    setIndex(0);
+    setMessageCount((prevCount) => prevCount + 4);
+    typeMessage();
+  }, []);
+
+
+  let videoArray = messages.filter(item => item.endsWith('.mp4'));
+
+
+  console.log(videoArray);
+  const handleScroll = (e) => {
+    const { scrollTop, scrollHeight, clientHeight } = e.target;
+    const scrolled = scrollTop / (scrollHeight - clientHeight);
+    const messageElements = document.querySelectorAll('.new-message-container');
+    messageElements.forEach((el, idx) => {
+      el.style.opacity = Math.min(Math.max((idx / messageList.length) - scrolled + 0.5, 0), 1);
+    });
+  };
+
+  const delay = (ms) => new Promise(res => setTimeout(res, ms));
+
+  const typeMessage = async () => {
+    if (isTyping) {
+      if (charIndex < messages[index].length) {
+        await delay(20);
+        setMessage((prevMessage) => prevMessage + messages[index][charIndex]);
+        setCharIndex((prevCharIndex) => prevCharIndex + 1);
+      } else {
+        setIsTyping(false);
+
+        if (messages[index].trim() !== '') {
+          setMessageList((prevMessageList) => [...prevMessageList, messages[index]]);
+        }
+
+        setMessage('');
+
+        if (index < messageCount - 1) {
+          setIndex((prevIndex) => prevIndex + 1);
+          setIsTyping(true);
+          setCharIndex(0);
         } else {
-          // Typing animation is complete for the current message
-          setIsTyping(false);
-
-          // Check if the message is not empty and add it to the list of displayed messages
-          if (messages[index].trim() !== '') {
-            setMessageList((prevMessageList) => [...prevMessageList, messages[index]]);
-          }
-
-          // Reset the message state
-          setMessage('');
-
-          // Check if there are more messages to display
-          if (index < messageCount - 1) {
-            // Move to the next message, re-enable typing animation, and reset character index
-            setIndex((prevIndex) => prevIndex + 1);
-            setIsTyping(true);
-            setCharIndex(0);
+          // Check if the current message is a video
+          if (messages[index].endsWith('.mp4')) {
+            // If it's a video, wait for the video to finish playing before moving to the next message
+            await delay(3000);
           } else {
-            // No more messages to display, disable typing animation
+            // If it's not a video, set isTyping to false
             setIsTyping(false);
           }
         }
       }
-    };
-
-    // Call the typing animation function
-    typeMessage();
-  }, [isTyping, index, charIndex, messages, messageCount]);
-
-
-  // Function to introduce a delay using Promises
-  // const delay = (duration) => new Promise((resolve) => setTimeout(resolve, duration));
-  const delay = ms => new Promise(res => setTimeout(res, ms));
-
-
-  // Function to handle "Next Message" button click
-
-  const handleClick = async () => {
-    // Add fade-out class to the first four messages
-    for (let i = 0; i < 4; i++) {
-      const messageElement = document.querySelector(`.message-${i}`);
-      if (messageElement) {
-        messageElement.classList.add('fade-out');
-      }
-    }
-
-    // Remove the first four messages from the view after a delay
-    setTimeout(() => {
-      setMessageList((prevMessageList) => prevMessageList.slice(4));
-    }, 1000);
-
-
-    if (index + 1 < messages.length) {
-      setIsTyping(true);
-      setIndex((prevIndex) => prevIndex + 1);
-      setCharIndex(0);
-      setMessage('');
-
-      // Increment messageCount for every click
-      setMessageCount(prevMessageCount => prevMessageCount + 4);
-
-      await delay(3000);
-
-    } else {
-      // Handle end of messages
-      console.log('End of messages');
     }
   };
 
-  // Use useEffect to display the second message (index 1)
-  useEffect(() => {
-    setIndex(0); // Start from index 1
-    setMessageCount(+1); // Set the total number of messages to 4
-    handleClick();
-  }, []); // Empty dependency array means this effect runs once on mount
 
+
+  // if (messageCount < messages.length) {
+  //   setIsTyping(true);
+  //   setMessageCount((prevCount) => prevCount + 4);
+  //   await delay(3000);
+
+
+  const handleClick = async () => {
+    const handleClick = () => {
+      if (index < messages.length) {
+        setIsTyping(true);
+      }
+    };
+  }
+
+  // UseEffect to initialize the chatbot
+  useEffect(() => {
+    setIndex(0);
+    setMessageCount((prevCount) => prevCount + 4);
+    typeMessage();
+  }, []);
 
   return (
     <div className="chatbot-page">
@@ -149,11 +161,12 @@ const Chatbot = () => {
       </h3>
       <img src={Flowers1} className="chatbot-page-Flowers2" alt="Flowers-background" />
       <div className='chatbot'>
+
         <img src={AiIcon} className="AiIcon" alt="AiIcon" />
         {isTyping ? <img src={Dots} className="dots" alt="Dots" /> : null}
-        <div className="messages-display-container">
+        <div className="messages-display-container" style={{ overflowY: 'scroll' }}>
           {messageList.map((item, index) => {
-            if (item.startsWith('http') && item.endsWith('.mp4')) {
+            if (item.endsWith('.mp4')) {
               return (
                 <div key={index} className="new-message-container">
                   <video
