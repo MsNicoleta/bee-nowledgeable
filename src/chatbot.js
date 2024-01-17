@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ReactPlayer from 'react-player';
 import Bee1 from './img/Bee1.png';
 import Flowers1 from './img/Flowers1.png';
 import AiIcon from './img/AI-Icon.svg';
@@ -8,7 +9,7 @@ import Dots from './img/dot.svg';
 import './chatbot.css';
 
 const Chatbot = () => {
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(3);
   const [message, setMessage] = useState('');
   const [isTyping, setIsTyping] = useState(true);
   const [charIndex, setCharIndex] = useState(0);
@@ -62,7 +63,6 @@ const Chatbot = () => {
       messageContainer.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
   useEffect(() => {
     const typeMessageWrapper = async () => {
       await typeMessage();
@@ -86,6 +86,7 @@ const Chatbot = () => {
 
 
   console.log(videoArray);
+
   const handleScroll = (e) => {
     const { scrollTop, scrollHeight, clientHeight } = e.target;
     const scrolled = scrollTop / (scrollHeight - clientHeight);
@@ -96,6 +97,8 @@ const Chatbot = () => {
   };
 
   const delay = (ms) => new Promise(res => setTimeout(res, ms));
+
+  let nextMessageButtonClicked = false; // This should be set to true when "Next Message" button is clicked
 
   const typeMessage = async () => {
     if (isTyping) {
@@ -112,46 +115,45 @@ const Chatbot = () => {
 
         setMessage('');
 
-        if (index < messageCount - 1) {
+        // Check if the current index is less than messageCount + 3 and the number of displayed items is less than 4
+        if (index < messageCount + 3 && messageList.length % 4 !== 3) { // Add this condition
+          // If it is, wait for 3 seconds and then increment the index and start typing the next message
+          await delay(3000);
           setIndex((prevIndex) => prevIndex + 1);
           setIsTyping(true);
           setCharIndex(0);
-        } else {
-          // Check if the current message is a video
+
+          // If the current message is a video, wait for the video to finish playing before moving to the next message
           if (messages[index].endsWith('.mp4')) {
-            // If it's a video, wait for the video to finish playing before moving to the next message
-            await delay(3000);
-          } else {
-            // If it's not a video, set isTyping to false
-            setIsTyping(false);
+            setIsVideoPlaying(true);
+            await delay(5000); // Adjust the delay as needed based on the video length
+            setIsVideoPlaying(false);
           }
+        } else {
+          // If it's not, stop typing until the button is clicked
+          setIsTyping(false);
         }
       }
     }
   };
 
-
-
-  // if (messageCount < messages.length) {
-  //   setIsTyping(true);
-  //   setMessageCount((prevCount) => prevCount + 4);
-  //   await delay(3000);
-
-
   const handleClick = async () => {
-    const handleClick = () => {
-      if (index < messages.length) {
-        setIsTyping(true);
-      }
-    };
-  }
+    if (index + 3 < messages.length) {
+      setIsTyping(true);
+      setIndex((prevIndex) => prevIndex + 1);
+      setCharIndex(0);
+      setMessage('');
 
-  // UseEffect to initialize the chatbot
-  useEffect(() => {
-    setIndex(0);
-    setMessageCount((prevCount) => prevCount + 4);
-    typeMessage();
-  }, []);
+      // If the next message is a video, wait for it to finish playing before moving to the next
+      if (messages[index + 1].endsWith('.mp4')) {
+        setIsVideoPlaying(true);
+        await delay(3000); // Adjust the delay based on the video length
+        setIsVideoPlaying(false);
+      }
+    } else {
+      console.log('End of messages');
+    }
+  };
 
   return (
     <div className="chatbot-page">
@@ -169,19 +171,17 @@ const Chatbot = () => {
             if (item.endsWith('.mp4')) {
               return (
                 <div key={index} className="new-message-container">
-                  <video
+                  <ReactPlayer
                     key={`video-${index}`}
+                    url={item}
+
                     width="320"
                     height="240"
                     controls
-                    autoPlay
-                    muted
+                    playing={isVideoPlaying}
                     onPlay={handleVideoPlay}
                     onPause={handleVideoPause}
-                  >
-                    <source src={item} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
+                  />
                 </div>
               );
             } else {
@@ -208,7 +208,7 @@ const Chatbot = () => {
           )}
         </div>
       </div>
-    </div>
+    </div >
   );
 };
 

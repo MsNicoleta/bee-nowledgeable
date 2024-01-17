@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import chatbotBee1 from './img/Bee1.png';
 import Flowers2 from './img/Flowers2.png';
 import AiIcon from './img/AI-Icon.svg';
-
+import video from './Video/bee_farm.mp4'
 import Dots from './img/dot.svg';
 import './chatbot.css';
 
