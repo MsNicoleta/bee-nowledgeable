@@ -5,6 +5,8 @@ import ReactPlayer from 'react-player';
 import Bee1 from './img/Bee1.png';
 import Flowers1 from './img/Flowers1.png';
 import AiIcon from './img/AI-Icon.svg';
+import beeFarm from './Video/bee_farm.mp4'
+import beePollinating from './Video/bee_pollinating.mp4'
 import Dots from './img/dot.svg';
 import './chatbot.css';
 
@@ -14,14 +16,14 @@ const Chatbot = () => {
   const [isTyping, setIsTyping] = useState(true);
   const [charIndex, setCharIndex] = useState(0);
   const [messageList, setMessageList] = useState([]);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [isVideoPlaying, setIsVideoPlaying] = React.useState(false)
   const [messageCount, setMessageCount] = useState(0);
 
   const messages = [
     'Hey there, curious minds! Lets dive into the world of Bees 🌼🐝🌻',
-    './Video/bee_farm.mp4',
+    beeFarm,
     'Have you ever wondered about the tiny creatures buzzing around flowers, collecting sweet nectar?',
-    './Video/bee_pollinating.mp4',
+    beePollinating,
     'Well, those little superheroes are none other than bees! 🐝 ',
     'Let\'s embark on a buzzing adventure to discover why these tiny creatures are so important.',
     'Bees are not just cute and fuzzy insects; they play a crucial role in our world.',
@@ -36,9 +38,24 @@ const Chatbot = () => {
     'They might be small, but they sure do a big job in keeping our planet blooming and delicious. 🌸🍯',
     'Keep on buzzing with curiosity, and let\'s continue learning about the amazing world of bees! 🐝✨'
   ];
-  console.log(messages);
+  // console.log(messages);
   console.log(messageList);
   // Initialize messageCount in state
+
+  // Add this component somewhere in your file
+  function VideoPlayer({ messages }) {
+    const [urlIndex, setUrlIndex] = React.useState(0);
+
+    const handleEnded = () => {
+      setUrlIndex((prevUrlIndex) => prevUrlIndex + 1);
+    };
+
+    return (
+      <div>
+        <ReactPlayer url={messages[urlIndex]} playing controls onEnded={handleEnded} />
+      </div>
+    );
+  }
 
   const handleVideoPlay = () => {
     setIsVideoPlaying(true);
