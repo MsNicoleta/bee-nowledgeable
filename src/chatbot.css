@@ -107,16 +107,27 @@
 
 
 
-
 .new-message-container {
   background-color: rgb(255, 253, 240);
   color: #39170F;
   padding: 12px;
   margin: 16px;
   border-radius: 15px;
-  max-width: 80%;
+  width: 70%;
+  /* Set width to 80% to match the video player */
   z-index: 2;
   text-align: left;
+  display: flex;
+  justify-content: center;
+  container-type: inline-size;
+}
+
+.new-message-container video {
+  /* Style for video container within new-message-container */
+
+  /* Set width to 80% to match the new-message-container */
+  border-radius: 13px;
+  /* Set border radius to 13px */
 }
 
 
@@ -150,17 +161,4 @@ p {
   font-family: 'Fredoka', sans-serif;
   font-weight: 600;
   font-size: 1.5rem;
-}
-
-.player-wrapper {
-  position: relative;
-  padding-top: 56.25%;
-  /* 720 / 1280 = 0.5625 */
-  /* aspect-ratio: 16 / 9; */
-
-}
-
-.react-player {
-  width: 50%;
-  height: 300px;
 }

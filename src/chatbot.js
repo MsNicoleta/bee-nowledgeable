@@ -191,8 +191,7 @@ const Chatbot = () => {
                   <ReactPlayer
                     key={`video-${index}`}
                     url={item}
-                    width="20"
-                    height="40"
+                    style={{ width: '55%', borderRadius: '10px' }}
                     controls
                     playing={isVideoPlaying}
                     onPlay={handleVideoPlay}
