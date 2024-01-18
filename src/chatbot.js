@@ -21,7 +21,6 @@ const Chatbot = () => {
 
   const messages = [
     'Hey there, curious minds! Lets dive into the world of Bees 🌼🐝🌻',
-    beeFarm,
     'Have you ever wondered about the tiny creatures buzzing around flowers, collecting sweet nectar?',
     beePollinating,
     'Well, those little superheroes are none other than bees! 🐝 ',
@@ -31,6 +30,7 @@ const Chatbot = () => {
     'Bees help plants make seeds by carrying pollen from one flower to another, helping them grow and reproduce.',
     'Nice to meet you!',
     'In fact, one out of every three bites of food you eat is thanks to a bee!',
+    beeFarm,
     'But bees aren\'t just busy at work; they\'re also part of a big team.',
     'Honeybees, for example, live in colonies and work together to build hives, gather food, and take care of their queen. ',
     'Teamwork makes the dream work, right?',
@@ -51,8 +51,8 @@ const Chatbot = () => {
     };
 
     return (
-      <div>
-        <ReactPlayer url={messages[urlIndex]} playing controls onEnded={handleEnded} />
+      <div player-wrapper>
+        <ReactPlayer url={messages[urlIndex]} className="react-player" playing controls onEnded={handleEnded} />
       </div>
     );
   }
@@ -109,7 +109,7 @@ const Chatbot = () => {
     const scrolled = scrollTop / (scrollHeight - clientHeight);
     const messageElements = document.querySelectorAll('.new-message-container');
     messageElements.forEach((el, idx) => {
-      el.style.opacity = Math.min(Math.max((idx / messageList.length) - scrolled + 0.5, 0), 1);
+      // el.style.opacity = Math.min(Math.max((idx / messageList.length) - scrolled + 1, 0), 1);
     });
   };
 
@@ -135,7 +135,7 @@ const Chatbot = () => {
         // Check if the current index is less than messageCount + 3 and the number of displayed items is less than 4
         if (index < messageCount + 3 && messageList.length % 4 !== 3) { // Add this condition
           // If it is, wait for 3 seconds and then increment the index and start typing the next message
-          await delay(3000);
+          await delay(30);
           setIndex((prevIndex) => prevIndex + 1);
           setIsTyping(true);
           setCharIndex(0);
@@ -191,9 +191,8 @@ const Chatbot = () => {
                   <ReactPlayer
                     key={`video-${index}`}
                     url={item}
-
-                    width="320"
-                    height="240"
+                    width="20"
+                    height="40"
                     controls
                     playing={isVideoPlaying}
                     onPlay={handleVideoPlay}
@@ -217,7 +216,7 @@ const Chatbot = () => {
         </div>
         <div>
           {isVideoPlaying ? (
-            <p>Video is playing!</p>
+            <p></p>
           ) : (
             <button className="next-message-button" onClick={handleClick}>
               Next Message

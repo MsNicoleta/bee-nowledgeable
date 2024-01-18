@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,300;8..144,400;8..144,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&family=Kalam:wght@300;400;700&display=swap');
 
 .chatbot-page {
   text-align: center;
@@ -98,9 +98,10 @@
   flex-direction: column !important;
   margin-left: 5rem;
   z-index: 0;
-  height: 23rem;
+  height: 30rem;
   /* Adjust this value as needed */
   overflow-y: auto;
+
   /* Add this line to enable vertical scrolling */
 }
 
@@ -112,7 +113,7 @@
   color: #39170F;
   padding: 12px;
   margin: 16px;
-  border-radius: 39px;
+  border-radius: 15px;
   max-width: 80%;
   z-index: 2;
   text-align: left;
@@ -146,4 +147,20 @@ p {
   display: block;
   margin-block-start: 0.5rem;
   margin-block-end: 0.5rem;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.player-wrapper {
+  position: relative;
+  padding-top: 56.25%;
+  /* 720 / 1280 = 0.5625 */
+  /* aspect-ratio: 16 / 9; */
+
+}
+
+.react-player {
+  width: 50%;
+  height: 300px;
 }
