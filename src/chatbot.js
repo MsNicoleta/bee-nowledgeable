@@ -1,4 +1,4 @@
-
+// Import necessary dependencies and styles
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReactPlayer from 'react-player';
@@ -10,7 +10,9 @@ import beePollinating from './Video/bee_pollinating.mp4'
 import Dots from './img/dot.svg';
 import './chatbot.css';
 
+// Define the main Chatbot component
 const Chatbot = () => {
+  // State variables to manage the chatbot's state
   const [index, setIndex] = useState(3);
   const [message, setMessage] = useState('');
   const [isTyping, setIsTyping] = useState(true);
@@ -19,6 +21,7 @@ const Chatbot = () => {
   const [isVideoPlaying, setIsVideoPlaying] = React.useState(false)
   const [messageCount, setMessageCount] = useState(0);
 
+  // Messages array containing text and video messages
   const messages = [
     'Hey there, curious minds! Lets dive into the world of Bees 🌼🐝🌻',
     'Have you ever wondered about the tiny creatures buzzing around flowers, collecting sweet nectar?',
@@ -38,41 +41,40 @@ const Chatbot = () => {
     'They might be small, but they sure do a big job in keeping our planet blooming and delicious. 🌸🍯',
     'Keep on buzzing with curiosity, and let\'s continue learning about the amazing world of bees! 🐝✨'
   ];
-  // console.log(messages);
-  console.log(messageList);
-  // Initialize messageCount in state
 
   // Add this component somewhere in your file
+  // This is a separate component for the video player
   function VideoPlayer({ messages }) {
     const [urlIndex, setUrlIndex] = React.useState(0);
 
+    // Callback function to handle the end of the video
     const handleEnded = () => {
       setUrlIndex((prevUrlIndex) => prevUrlIndex + 1);
     };
 
     return (
       <div player-wrapper>
+        {/* ReactPlayer component for playing videos */}
         <ReactPlayer url={messages[urlIndex]} className="react-player" playing controls onEnded={handleEnded} />
       </div>
     );
   }
 
+  // Event handlers for video play and pause
   const handleVideoPlay = () => {
     setIsVideoPlaying(true);
     console.log('The video started playing');
-
   };
 
   const handleVideoPause = () => {
     console.log('The video was paused');
-
     setIsVideoPlaying(false);
   };
-  // console.log(messages);
-  console.log(messageList);
-  // Initialize messageCount in state
 
+  // React Router hook for navigation
   const navigate = useNavigate();
+
+  // useEffect hook to handle scrolling
   useEffect(() => {
     const messageContainer = document.querySelector('.messages-display-container');
     messageContainer.addEventListener('scroll', handleScroll);
@@ -80,6 +82,8 @@ const Chatbot = () => {
       messageContainer.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  // useEffect hook for typing messages
   useEffect(() => {
     const typeMessageWrapper = async () => {
       await typeMessage();
@@ -87,23 +91,25 @@ const Chatbot = () => {
     typeMessageWrapper();
   }, [isTyping, index, charIndex, messages, messageCount]);
 
+  // useEffect hook to scroll to the last message
   useEffect(() => {
     const lastMessageElement = document.querySelector('.new-message-container:last-child');
     lastMessageElement?.scrollIntoView({ behavior: 'smooth' });
   }, [messageList]);
 
+  // useEffect hook for initial setup
   useEffect(() => {
     setIndex(0);
     setMessageCount((prevCount) => prevCount + 4);
     typeMessage();
   }, []);
 
-
+  // Filter video messages from the messages array
   let videoArray = messages.filter(item => item.endsWith('.mp4'));
-
 
   console.log(videoArray);
 
+  // Scroll event handler to control opacity of messages
   const handleScroll = (e) => {
     const { scrollTop, scrollHeight, clientHeight } = e.target;
     const scrolled = scrollTop / (scrollHeight - clientHeight);
@@ -113,14 +119,17 @@ const Chatbot = () => {
     });
   };
 
+  // Utility function for delaying execution
   const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
-  let nextMessageButtonClicked = false; // This should be set to true when "Next Message" button is clicked
+  // Variable to track if "Next Message" button is clicked
+  let nextMessageButtonClicked = false;
 
+  // Function to simulate typing messages
   const typeMessage = async () => {
     if (isTyping) {
       if (charIndex < messages[index].length) {
-        await delay(20);
+        await delay(30);
         setMessage((prevMessage) => prevMessage + messages[index][charIndex]);
         setCharIndex((prevCharIndex) => prevCharIndex + 1);
       } else {
@@ -135,7 +144,7 @@ const Chatbot = () => {
         // Check if the current index is less than messageCount + 3 and the number of displayed items is less than 4
         if (index < messageCount + 3 && messageList.length % 4 !== 3) { // Add this condition
           // If it is, wait for 3 seconds and then increment the index and start typing the next message
-          await delay(30);
+          await delay(3000);
           setIndex((prevIndex) => prevIndex + 1);
           setIsTyping(true);
           setCharIndex(0);
@@ -154,6 +163,7 @@ const Chatbot = () => {
     }
   };
 
+  // Event handler for "Next Message" button click
   const handleClick = async () => {
     if (index + 3 < messages.length) {
       setIsTyping(true);
@@ -172,6 +182,7 @@ const Chatbot = () => {
     }
   };
 
+  // Return the JSX for rendering the Chatbot component
   return (
     <div className="chatbot-page">
       <img src={Bee1} className="Bee-1" alt="bee" />
@@ -180,40 +191,45 @@ const Chatbot = () => {
       </h3>
       <img src={Flowers1} className="chatbot-page-Flowers2" alt="Flowers-background" />
       <div className='chatbot'>
-
         <img src={AiIcon} className="AiIcon" alt="AiIcon" />
         {isTyping ? <img src={Dots} className="dots" alt="Dots" /> : null}
         <div className="messages-display-container" style={{ overflowY: 'scroll' }}>
+          {/* Render each message in the messageList array */}
           {messageList.map((item, index) => {
             if (item.endsWith('.mp4')) {
+              // If the message is a video, render the ReactPlayer component
               return (
-                <div key={index} className="new-message-container">
+                <div key={index} className="video-display-container">
                   <ReactPlayer
                     key={`video-${index}`}
                     url={item}
-                    style={{ width: '55%', borderRadius: '10px' }}
+                    style={{ width: '70%', borderRadius: '10px' }}
                     controls
                     playing={isVideoPlaying}
                     onPlay={handleVideoPlay}
                     onPause={handleVideoPause}
                   />
                 </div>
+
               );
             } else {
+              // If the message is text, render a div with the text message
               return (
-                <div key={index} className="new-message-container" style={{ maxWidth: `${item.length * 10}px` }}>
+                <div key={index} className="new-message-container message-container" style={{ maxWidth: `${item.length * 11}px` }}>
                   <p className="chatbot-message">{item}</p>
                 </div>
               );
             }
           })}
+          {/* Render the current typing message */}
           {message.trim() !== '' && (
-            <div className="new-message-container" style={{ maxWidth: `${message.length * 10}px` }}>
+            <div className="new-message-container" style={{ maxWidth: `${message.length * 12}px` }}>
               <p className="chatbot-message">{message}</p>
             </div>
           )}
         </div>
         <div>
+          {/* Show "Next Message" button when a video is not playing */}
           {isVideoPlaying ? (
             <p></p>
           ) : (
@@ -227,4 +243,5 @@ const Chatbot = () => {
   );
 };
 
+// Export the Chatbot component
 export default Chatbot;

@@ -108,27 +108,41 @@
 
 
 .new-message-container {
-  background-color: rgb(255, 253, 240);
+  background-color: rgba(225, 224, 218, 0.623);
   color: #39170F;
   padding: 12px;
   margin: 16px;
   border-radius: 15px;
-  width: 70%;
+  min-width: auto;
   /* Set width to 80% to match the video player */
   z-index: 2;
   text-align: left;
   display: flex;
+  justify-content: left;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  /* Ensure it's positioned */
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  border: none !important;
+}
+
+
+
+.video-display-container {
+  border-radius: 33px;
+  margin-left: 2rem;
+  width: 55%;
+  z-index: 4;
+  /* background-color: blueviolet; */
+  display: flex;
   justify-content: center;
-  container-type: inline-size;
+  /* Adjust this value as needed */
+
 }
 
-.new-message-container video {
-  /* Style for video container within new-message-container */
-
-  /* Set width to 80% to match the new-message-container */
-  border-radius: 13px;
-  /* Set border radius to 13px */
-}
 
 
 .next-message-button {
