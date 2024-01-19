@@ -52,12 +52,12 @@ const Chatbot = () => {
       setUrlIndex((prevUrlIndex) => prevUrlIndex + 1);
     };
 
-    return (
-      <div player-wrapper>
-        {/* ReactPlayer component for playing videos */}
-        <ReactPlayer url={messages[urlIndex]} className="react-player" playing controls onEnded={handleEnded} />
-      </div>
-    );
+    // return (
+    //   <div>
+    //     {/* ReactPlayer component for playing videos */}
+    //     {/* <ReactPlayer url={messages[urlIndex]} playing controls onEnded={handleEnded} /> */}
+    //   </div>
+    // );
   }
 
   // Event handlers for video play and pause
@@ -203,7 +203,7 @@ const Chatbot = () => {
                   <ReactPlayer
                     key={`video-${index}`}
                     url={item}
-                    style={{ width: '70%', borderRadius: '10px' }}
+
                     controls
                     playing={isVideoPlaying}
                     onPlay={handleVideoPlay}

@@ -108,7 +108,7 @@
 
 
 .new-message-container {
-  background-color: rgba(225, 224, 218, 0.623);
+  background-color: rgba(225, 224, 218, 0.841);
   color: #39170F;
   padding: 12px;
   margin: 16px;
@@ -132,17 +132,24 @@
 
 
 .video-display-container {
-  border-radius: 33px;
-  margin-left: 2rem;
   width: 55%;
   z-index: 4;
-  /* background-color: blueviolet; */
   display: flex;
   justify-content: center;
   /* Adjust this value as needed */
 
 }
 
+video {
+  border-radius: 20px;
+  width: 60%;
+
+}
+
+element.style {
+  width: 0;
+  height: 0;
+}
 
 
 .next-message-button {
