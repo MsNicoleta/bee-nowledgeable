@@ -13,13 +13,13 @@ import './chatbot.css';
 // Define the main Chatbot component
 const Chatbot = () => {
   // State variables to manage the chatbot's state
-  const [index, setIndex] = useState(3);
-  const [message, setMessage] = useState('');
-  const [isTyping, setIsTyping] = useState(true);
-  const [charIndex, setCharIndex] = useState(0);
-  const [messageList, setMessageList] = useState([]);
-  const [isVideoPlaying, setIsVideoPlaying] = React.useState(false)
-  const [messageCount, setMessageCount] = useState(0);
+  const [index, setIndex] = useState(3); // Track the index of the current message in the array
+  const [message, setMessage] = useState(''); // Track the currently typed message
+  const [isTyping, setIsTyping] = useState(true); // Flag to indicate if the chatbot is currently typing
+  const [charIndex, setCharIndex] = useState(0); // Index of the character being typed
+  const [messageList, setMessageList] = useState([]); // List of messages displayed in the chat
+  const [isVideoPlaying, setIsVideoPlaying] = React.useState(false) // Flag to indicate if a video is currently playing
+  const [messageCount, setMessageCount] = useState(0); // Counter for messages
 
   // Messages array containing text and video messages
   const messages = [
@@ -41,24 +41,6 @@ const Chatbot = () => {
     'They might be small, but they sure do a big job in keeping our planet blooming and delicious. 🌸🍯',
     'Keep on buzzing with curiosity, and let\'s continue learning about the amazing world of bees! 🐝✨'
   ];
-
-  // Add this component somewhere in your file
-  // This is a separate component for the video player
-  function VideoPlayer({ messages }) {
-    const [urlIndex, setUrlIndex] = React.useState(0);
-
-    // Callback function to handle the end of the video
-    const handleEnded = () => {
-      setUrlIndex((prevUrlIndex) => prevUrlIndex + 1);
-    };
-
-    // return (
-    //   <div>
-    //     {/* ReactPlayer component for playing videos */}
-    //     {/* <ReactPlayer url={messages[urlIndex]} playing controls onEnded={handleEnded} /> */}
-    //   </div>
-    // );
-  }
 
   // Event handlers for video play and pause
   const handleVideoPlay = () => {
@@ -116,6 +98,7 @@ const Chatbot = () => {
     const messageElements = document.querySelectorAll('.new-message-container');
     messageElements.forEach((el, idx) => {
       // el.style.opacity = Math.min(Math.max((idx / messageList.length) - scrolled + 1, 0), 1);
+      // Commented out for now, potential opacity control
     });
   };
 
@@ -193,6 +176,7 @@ const Chatbot = () => {
       <div className='chatbot'>
         <img src={AiIcon} className="AiIcon" alt="AiIcon" />
         {isTyping ? <img src={Dots} className="dots" alt="Dots" /> : null}
+
         <div className="messages-display-container" style={{ overflowY: 'scroll' }}>
           {/* Render each message in the messageList array */}
           {messageList.map((item, index) => {
@@ -203,8 +187,9 @@ const Chatbot = () => {
                   <ReactPlayer
                     key={`video-${index}`}
                     url={item}
-
                     controls
+                    width="320"
+                    height="240"
                     playing={isVideoPlaying}
                     onPlay={handleVideoPlay}
                     onPause={handleVideoPause}
@@ -215,7 +200,7 @@ const Chatbot = () => {
             } else {
               // If the message is text, render a div with the text message
               return (
-                <div key={index} className="new-message-container message-container" style={{ maxWidth: `${item.length * 11}px` }}>
+                <div key={index} className="new-message-container message-container" style={{ maxWidth: `${item.length * 10.5}px` }}>
                   <p className="chatbot-message">{item}</p>
                 </div>
               );
@@ -228,6 +213,7 @@ const Chatbot = () => {
             </div>
           )}
         </div>
+
         <div>
           {/* Show "Next Message" button when a video is not playing */}
           {isVideoPlaying ? (

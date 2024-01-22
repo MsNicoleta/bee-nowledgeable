@@ -176,14 +176,14 @@ const Chatbot = () => {
             );
           } else {
             return (
-              <div key={index} className="new-message-container" style={{ maxWidth: `${item.length * 10}px` }}>
+              <div key={index} className="new-message-container" style={{ maxWidth: `${item.length * 11}px` }}>
                 <p className="chatbot-message">{item}</p>
               </div>
             );
           }
         })}
         {message.trim() !== '' && (
-          <div className="new-message-container" style={{ maxWidth: `${message.length * 10}px` }}>
+          <div className="new-message-container" style={{ maxWidth: `${message.length * 12}px` }}>
             <p className="chatbot-message">{message}</p>
           </div>
         )}

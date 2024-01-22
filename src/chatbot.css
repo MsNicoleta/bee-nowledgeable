@@ -14,6 +14,14 @@
   z-index: 1;
 }
 
+.chatbot {
+  margin-left: 0rem;
+}
+
+
+
+
+
 
 .chatbot-page-Flowers2 {
   position: fixed;
@@ -80,7 +88,7 @@
   height: 5rem;
   width: 5rem;
   top: 7rem;
-  left: 2rem;
+  left: 6rem;
   z-index: 3;
 }
 
@@ -88,7 +96,7 @@
   width: 4rem;
   position: absolute;
   top: 9rem;
-  left: 6rem;
+  left: 11rem;
   z-index: 3;
 }
 
@@ -96,7 +104,7 @@
   position: relative !important;
   top: 6rem;
   flex-direction: column !important;
-  margin-left: 5rem;
+  margin-left: 14rem;
   z-index: 0;
   height: 30rem;
   /* Adjust this value as needed */
@@ -110,9 +118,9 @@
 .new-message-container {
   background-color: rgba(225, 224, 218, 0.841);
   color: #39170F;
-  padding: 12px;
-  margin: 16px;
-  border-radius: 15px;
+  padding: 0.5rem 2rem;
+  margin: 0.5rem;
+  border-radius: 18px;
   min-width: auto;
   /* Set width to 80% to match the video player */
   z-index: 2;
@@ -120,35 +128,30 @@
   display: flex;
   justify-content: left;
   align-items: center;
-  flex-direction: column;
   position: relative;
   /* Ensure it's positioned */
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
   cursor: pointer;
   border: none !important;
 }
 
 
 
-.video-display-container {
-  width: 55%;
-  z-index: 4;
-  display: flex;
-  justify-content: center;
-  /* Adjust this value as needed */
-
-}
 
 video {
-  border-radius: 20px;
+  border-radius: 15px;
+  margin: 0.5rem !important;
   width: 60%;
-
+  height: 60%;
+  object-fit: cover;
+  /* Add this line to ensure the video fills the container */
 }
 
-element.style {
-  width: 0;
-  height: 0;
+.video-display-container {
+  width: 25%;
+  margin-left: 0.5rem;
+
 }
 
 
