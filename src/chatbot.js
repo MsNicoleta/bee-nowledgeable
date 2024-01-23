@@ -74,10 +74,7 @@ const Chatbot = () => {
   }, [isTyping, index, charIndex, messages, messageCount]);
 
   // useEffect hook to scroll to the last message
-  useEffect(() => {
-    const lastMessageElement = document.querySelector('.new-message-container:last-child');
-    lastMessageElement?.scrollIntoView({ behavior: 'smooth' });
-  }, [messageList]);
+
 
   // useEffect hook for initial setup
   useEffect(() => {
@@ -86,20 +83,28 @@ const Chatbot = () => {
     typeMessage();
   }, []);
 
+
+  useEffect(() => {
+    const messageContainer = document.querySelector('.messages-display-container');
+    messageContainer.addEventListener('scroll', handleScroll);
+    return () => {
+      messageContainer.removeEventListener('scroll', handleScroll);
+    };
+  }, [messageList]);
+
   // Filter video messages from the messages array
   let videoArray = messages.filter(item => item.endsWith('.mp4'));
 
   console.log(videoArray);
 
-  // Scroll event handler to control opacity of messages
-  const handleScroll = (e) => {
-    const { scrollTop, scrollHeight, clientHeight } = e.target;
-    const scrolled = scrollTop / (scrollHeight - clientHeight);
+  // Scroll event handler to control opacity of messages and focus on typing message
+  const handleScroll = () => {
     const messageElements = document.querySelectorAll('.new-message-container');
-    messageElements.forEach((el, idx) => {
-      // el.style.opacity = Math.min(Math.max((idx / messageList.length) - scrolled + 1, 0), 1);
-      // Commented out for now, potential opacity control
-    });
+    const lastMessageElement = messageElements[messageElements.length - 1];
+
+    if (lastMessageElement) {
+      lastMessageElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    }
   };
 
   // Utility function for delaying execution
@@ -109,35 +114,55 @@ const Chatbot = () => {
   let nextMessageButtonClicked = false;
 
   // Function to simulate typing messages
+  // This is an async function that types a message character by character
   const typeMessage = async () => {
+    // Check if the isTyping flag is true
     if (isTyping) {
+      // Check if the charIndex is less than the length of the current message
       if (charIndex < messages[index].length) {
+        // Wait for 30 milliseconds
         await delay(30);
+        // Append the current character to the message state
         setMessage((prevMessage) => prevMessage + messages[index][charIndex]);
+        // Increment the charIndex state
         setCharIndex((prevCharIndex) => prevCharIndex + 1);
       } else {
+        // Set the isTyping flag to false
         setIsTyping(false);
 
+        // Check if the current message is not empty
         if (messages[index].trim() !== '') {
+          // Add the current message to the messageList state
           setMessageList((prevMessageList) => [...prevMessageList, messages[index]]);
         }
 
+        // Clear the message state
         setMessage('');
 
         // Check if the current index is less than messageCount + 3 and the number of displayed items is less than 4
-        if (index < messageCount + 3 && messageList.length % 4 !== 3) { // Add this condition
-          // If it is, wait for 3 seconds and then increment the index and start typing the next message
+        if (index < messageCount + 3 && messageList.length % 4 !== 3) {
+          // If it is, wait for 3 seconds
           await delay(3000);
+          // Increment the index state
           setIndex((prevIndex) => prevIndex + 1);
+          // Set the isTyping flag to true
           setIsTyping(true);
+          // Reset the charIndex state
           setCharIndex(0);
 
-          // If the current message is a video, wait for the video to finish playing before moving to the next message
+          // Check if the current message is a video
           if (messages[index].endsWith('.mp4')) {
+            // Set the isVideoPlaying flag to true
             setIsVideoPlaying(true);
+            // Wait for 5 seconds or the duration of the video
             await delay(5000); // Adjust the delay as needed based on the video length
+            // Set the isVideoPlaying flag to false
             setIsVideoPlaying(false);
           }
+          // Get the last message element inside the container
+          const lastMessage = document.querySelector('.new-message-container:last-child');
+          // Scroll the container to the last message
+          lastMessage.scrollIntoView();
         } else {
           // If it's not, stop typing until the button is clicked
           setIsTyping(false);
@@ -146,7 +171,11 @@ const Chatbot = () => {
     }
   };
 
+
+
+
   // Event handler for "Next Message" button click
+
   const handleClick = async () => {
     if (index + 3 < messages.length) {
       setIsTyping(true);
@@ -160,11 +189,14 @@ const Chatbot = () => {
         await delay(3000); // Adjust the delay based on the video length
         setIsVideoPlaying(false);
       }
+
+      // Scroll to the top to show the most recent 4 messages
+      const messageContainer = document.querySelector('.messages-display-container');
+      messageContainer.scrollTop = 0;
     } else {
       console.log('End of messages');
     }
   };
-
   // Return the JSX for rendering the Chatbot component
   return (
     <div className="chatbot-page">
