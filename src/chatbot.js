@@ -191,7 +191,7 @@ const Chatbot = () => {
       }
 
       // Scroll to the top to show the most recent 4 messages
-      const messageContainer = document.querySelector('.messages-display-container');
+      const messageContainer = document.querySelector('messages-display-container');
       messageContainer.scrollTop = 0;
     } else {
       console.log('End of messages');
