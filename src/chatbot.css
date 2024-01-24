@@ -63,10 +63,10 @@
 
 .chatbot-Bee-1 {
   position: absolute;
-  right: 25%;
-  top: 10%;
-  height: 5vmin;
-  width: 5vmin;
+  right: 20%;
+  top: 25%;
+  height: 7vmin;
+  width: 7vmin;
   z-index: 1;
   animation: chatbot-Bee-1-animation 17s ease-in-out infinite forwards;
 }
@@ -89,29 +89,26 @@
   position: absolute;
   height: 5rem;
   width: 5rem;
-  top: 45rem;
-  left: 9rem;
+  top: 32rem;
+  left: 14rem;
   z-index: 3;
 }
 
 .dots {
   width: 4rem;
   position: absolute;
-  top: 47rem;
-  left: 13rem;
+  top: 34rem;
+  left: 18rem;
   z-index: 3;
 }
 
 .messages-display-container {
   position: relative !important;
-  top: 19rem;
-  margin-left: 20rem;
+  top: 12rem;
+  margin-left: 24rem;
   z-index: 0;
-  height: 35rem;
-  /* Adjust this value as needed */
+  height: 30rem;
   overflow-y: auto;
-
-  /* Add this line to enable vertical scrolling */
 }
 
 
@@ -162,8 +159,7 @@ video {
   /* Increased z-index */
   position: relative;
   /* Ensure it's positioned */
-  margin-top: 33rem;
-  margin-bottom: 10rem;
+  margin-top: 24rem;
   cursor: pointer;
   border: none !important;
 }

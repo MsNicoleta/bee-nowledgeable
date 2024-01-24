@@ -2,16 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Landing from './landing';
 import Chatbot from './chatbot';
-import CardComponent from './components/card';  // Replace with the actual path to your CardComponent
-
-function CombinedComponent() {
-  return (
-    <div>
-      <CardComponent />
-      <Chatbot />
-    </div>
-  );
-}
+import CombinedComponent from './components/CombinedComponent';
 
 function App() {
   return (

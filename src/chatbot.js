@@ -9,6 +9,24 @@ import beeFarm from './Video/bee_farm.mp4'
 import beePollinating from './Video/bee_pollinating.mp4'
 import Dots from './img/dot.svg';
 import './chatbot.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import CardComponent from './components/CardComponent.js';
+
+
+const BeeDetails = [
+  {
+    type: 'Bee Type 1',
+    description: 'Description for Bee Type 1...',
+    image: './img/jan-meeus-SfFMhcekh24-unsplash.jpg',
+  },
+  {
+    type: 'Bee Type 2',
+    description: 'Description for Bee Type 2...',
+    image: './img/aaron-burden-6csuZQ9oZcI-unsplash.jpg',
+  },
+  // Add more bee details as needed
+];
+
 
 // Define the main Chatbot component
 const Chatbot = () => {
@@ -21,6 +39,10 @@ const Chatbot = () => {
   const [isVideoPlaying, setIsVideoPlaying] = React.useState(false) // Flag to indicate if a video is currently playing
   const [messageCount, setMessageCount] = useState(0); // Counter for messages
   const lastMessageRef = useRef(null);
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const [selectedBee, setSelectedBee] = useState(null);
+  const [displayBeeCards, setDisplayBeeCards] = useState(false);
+
 
 
   // Messages array containing text and video messages
@@ -33,15 +55,15 @@ const Chatbot = () => {
     'Bees are not just cute and fuzzy insects; they play a crucial role in our world.',
     'You see, bees are fantastic pollinators.',
     'Bees help plants make seeds by carrying pollen from one flower to another, helping them grow and reproduce.',
-    'Nice to meet you!',
-    'In fact, one out of every three bites of food you eat is thanks to a bee!',
-    beeFarm,
-    'But bees aren\'t just busy at work; they\'re also part of a big team.',
-    'Honeybees, for example, live in colonies and work together to build hives, gather food, and take care of their queen. ',
-    'Teamwork makes the dream work, right?',
-    'So, next time you see a bee buzzing by, remember to say a little thank you!',
-    'They might be small, but they sure do a big job in keeping our planet blooming and delicious. 🌸🍯',
-    'Keep on buzzing with curiosity, and let\'s continue learning about the amazing world of bees! 🐝✨'
+    // 'Nice to meet you!',
+    // 'In fact, one out of every three bites of food you eat is thanks to a bee!',
+    // // beeFarm,
+    // 'But bees aren\'t just busy at work; they\'re also part of a big team.',
+    // 'Honeybees, for example, live in colonies and work together to build hives, gather food, and take care of their queen. ',
+    // 'Teamwork makes the dream work, right?',
+    // 'So, next time you see a bee buzzing by, remember to say a little thank you!',
+    // 'They might be small, but they sure do a big job in keeping our planet blooming and delicious. 🌸🍯',
+    // 'Keep on buzzing with curiosity, and let\'s continue learning about the amazing world of bees! 🐝✨'
   ];
 
   // Event handlers for video play and pause
@@ -100,7 +122,11 @@ const Chatbot = () => {
   // Filter video messages from the messages array
   let videoArray = messages.filter(item => item.endsWith('.mp4'));
 
-  console.log(videoArray);
+  // console.log(videoArray);
+
+
+
+
 
   // Scroll event handler to control opacity of messages and focus on typing message
   const handleScroll = () => {
@@ -116,11 +142,17 @@ const Chatbot = () => {
     }
   };
 
+
+
+
   // Utility function for delaying execution
   const delay = (ms) => new Promise(res => setTimeout(res, ms));
 
   // Variable to track if "Next Message" button is clicked
   let nextMessageButtonClicked = false;
+
+
+
 
   // Function to simulate typing messages
   // This is an async function that types a message character by character
@@ -182,6 +214,7 @@ const Chatbot = () => {
   // Event handler for "Next Message" button click
   const handleClick = async () => {
     if (index + 3 < messages.length) {
+      // Handle normal message progression
       setIsTyping(true);
       setIndex((prevIndex) => prevIndex + 1);
       setCharIndex(0);
@@ -194,18 +227,42 @@ const Chatbot = () => {
         setIsVideoPlaying(false);
       }
 
-      // Scroll to the top to show the most recent 4 messages
+      // Scroll up and keep the focus on the typing message
       const messageContainer = document.querySelector('.messages-display-container');
-      messageContainer.scrollTop = 0;
+      messageContainer.scrollTop -= 30;
+
+      // Check if the messages are finished
+      if (index + 3 >= messages.length || (index >= messages.length - 1 && !isTyping)) {
+        // Set up for displaying bee cards
+        setDisplayBeeCards(true);
+        handleCardClick(); // Call handleCardClick when messages are finished
+      }
     } else {
       console.log('End of messages');
     }
   };
 
+
+  // function sets the selected bee when a card is clicked and opens the overlay.
+  const handleCardClick = (index) => {
+    setSelectedBee(BeeDetails[index]);
+    setIsOverlayOpen(true);
+  };
+
+  // define a function to close the overlay
+  const closeOverlay = () => {
+    setIsOverlayOpen(false);
+  };
+  // Define a function that calls both handleCardClick and handleClick
+  const handleNextButtonClick = () => {
+    handleCardClick(); // Call handleCardClick function
+    handleClick(); // Call handleClick function
+  };
+
   // Return the JSX for rendering the Chatbot component
   return (
     <div className="chatbot-page">
-      <img src={Bee1} className="Bee-1" alt="bee" />
+      <img src={Bee1} className="chatbot-Bee-1" alt="bee" />
       <div onClick={() => navigate('/landing')} className="chatbot-title">
         Bee Knowledgeable
       </div>
@@ -249,21 +306,48 @@ const Chatbot = () => {
               );
             }
           })}
-
-        </div>
-
-        <div>
-          {/* Show "Next Message" button when a video is not playing */}
-          {isVideoPlaying ? (
-            <p></p>
-          ) : (
-            <button className="next-message-button" onClick={handleClick}>
-              Next Message
-            </button>
+          {displayBeeCards && (
+            <div className="bee-cards-container">
+              {BeeDetails.map((bee, index) => (
+                <CardComponent
+                  key={index}
+                  image={bee.image}
+                  title={bee.type}
+                  onClick={() => handleCardClick(index)}
+                />
+              ))}
+            </div>
           )}
+
+          {/* Overlay for detailed bee description */}
+          {isOverlayOpen && selectedBee && (
+            <div className="overlay" onClick={closeOverlay}>
+              <div className="overlay-content">
+                <img src={selectedBee.image} alt={selectedBee.type} />
+                <h2>{selectedBee.type}</h2>
+                <p>{selectedBee.description}</p>
+              </div>
+            </div>
+          )}
+
         </div>
+
       </div>
-    </div >
+
+      <div>
+        {/* Show "Next Message" button when a video is not playing */}
+        {isVideoPlaying ? (
+          <p></p>
+        ) : (
+
+          // Render the button with the combined click handler
+          <button className="next-message-button" onClick={handleNextButtonClick}>
+            Next
+          </button>
+        )}
+      </div>
+    </div>
+
   );
 };
 
