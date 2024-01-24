@@ -16,9 +16,9 @@ const Landing = () => {
 
       <img src={Bee2} className="Bee-2" alt="bee" />
       <img src={Bee1} className="Bee-1" alt="bee" />
-      <h1 className="landing-title">
+      <div className="landing-title">
         Bee Knowledgeable
-      </h1>
+      </div>
       <h3 className="landing-intro">Step into the world of bees.
         <br />Learn all about these beautiful workers that help life flourish.</h3>
       <div onClick={() => navigate('/chatbot')} className='button'>Learn more</div>

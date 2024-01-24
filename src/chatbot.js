@@ -1,5 +1,5 @@
 // Import necessary dependencies and styles
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ReactPlayer from 'react-player';
 import Bee1 from './img/Bee1.png';
@@ -20,6 +20,8 @@ const Chatbot = () => {
   const [messageList, setMessageList] = useState([]); // List of messages displayed in the chat
   const [isVideoPlaying, setIsVideoPlaying] = React.useState(false) // Flag to indicate if a video is currently playing
   const [messageCount, setMessageCount] = useState(0); // Counter for messages
+  const lastMessageRef = useRef(null);
+
 
   // Messages array containing text and video messages
   const messages = [
@@ -73,8 +75,11 @@ const Chatbot = () => {
     typeMessageWrapper();
   }, [isTyping, index, charIndex, messages, messageCount]);
 
-  // useEffect hook to scroll to the last message
 
+  // useEffect hook to scroll to the last message
+  useEffect(() => {
+    lastMessageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [messageList]);
 
   // useEffect hook for initial setup
   useEffect(() => {
@@ -99,11 +104,15 @@ const Chatbot = () => {
 
   // Scroll event handler to control opacity of messages and focus on typing message
   const handleScroll = () => {
-    const messageElements = document.querySelectorAll('.new-message-container');
-    const lastMessageElement = messageElements[messageElements.length - 1];
+    const messageContainer = document.querySelector('.messages-display-container');
 
-    if (lastMessageElement) {
-      lastMessageElement.scrollIntoView({ behavior: 'smooth', block: 'end' });
+    // Check if the container is scrolled to the top
+    if (messageContainer.scrollTop === 0) {
+      // If it is, set the scroll behavior to auto (normal scrolling)
+      messageContainer.style.scrollBehavior = 'auto';
+    } else {
+      // If it's not at the top, set the scroll behavior to smooth (inverted scrolling)
+      messageContainer.style.scrollBehavior = 'smooth';
     }
   };
 
@@ -132,8 +141,8 @@ const Chatbot = () => {
 
         // Check if the current message is not empty
         if (messages[index].trim() !== '') {
-          // Add the current message to the messageList state
-          setMessageList((prevMessageList) => [...prevMessageList, messages[index]]);
+          // Unshift the current message to the beginning of the messageList
+          setMessageList((prevMessageList) => [messages[index], ...prevMessageList]);
         }
 
         // Clear the message state
@@ -159,10 +168,6 @@ const Chatbot = () => {
             // Set the isVideoPlaying flag to false
             setIsVideoPlaying(false);
           }
-          // Get the last message element inside the container
-          const lastMessage = document.querySelector('.new-message-container:last-child');
-          // Scroll the container to the last message
-          lastMessage.scrollIntoView();
         } else {
           // If it's not, stop typing until the button is clicked
           setIsTyping(false);
@@ -175,7 +180,6 @@ const Chatbot = () => {
 
 
   // Event handler for "Next Message" button click
-
   const handleClick = async () => {
     if (index + 3 < messages.length) {
       setIsTyping(true);
@@ -191,25 +195,32 @@ const Chatbot = () => {
       }
 
       // Scroll to the top to show the most recent 4 messages
-      const messageContainer = document.querySelector('messages-display-container');
+      const messageContainer = document.querySelector('.messages-display-container');
       messageContainer.scrollTop = 0;
     } else {
       console.log('End of messages');
     }
   };
+
   // Return the JSX for rendering the Chatbot component
   return (
     <div className="chatbot-page">
       <img src={Bee1} className="Bee-1" alt="bee" />
-      <h3 onClick={() => navigate('/landing')} className="chatbot-title">
+      <div onClick={() => navigate('/landing')} className="chatbot-title">
         Bee Knowledgeable
-      </h3>
+      </div>
       <img src={Flowers1} className="chatbot-page-Flowers2" alt="Flowers-background" />
       <div className='chatbot'>
         <img src={AiIcon} className="AiIcon" alt="AiIcon" />
         {isTyping ? <img src={Dots} className="dots" alt="Dots" /> : null}
 
-        <div className="messages-display-container" style={{ overflowY: 'scroll' }}>
+        <div className="messages-display-container" style={{ overflowY: 'scroll', display: 'flex', flexDirection: 'column-reverse' }}>
+          {/* Render the current typing message */}
+          {message.trim() !== '' && (
+            <div className="new-message-container" ref={lastMessageRef} style={{ maxWidth: `${message.length * 12}px` }}>
+              <p className="chatbot-message">{message}</p>
+            </div>
+          )}
           {/* Render each message in the messageList array */}
           {messageList.map((item, index) => {
             if (item.endsWith('.mp4')) {
@@ -238,12 +249,7 @@ const Chatbot = () => {
               );
             }
           })}
-          {/* Render the current typing message */}
-          {message.trim() !== '' && (
-            <div className="new-message-container" style={{ maxWidth: `${message.length * 12}px` }}>
-              <p className="chatbot-message">{message}</p>
-            </div>
-          )}
+
         </div>
 
         <div>

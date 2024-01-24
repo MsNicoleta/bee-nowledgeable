@@ -78,6 +78,8 @@
 
 .chatbot-title {
   font-family: 'Kalam', cursive;
+  font-weight: 600;
+  margin: 2rem;
   cursor: pointer;
   align-self: center;
   z-index: 3;
@@ -103,7 +105,6 @@
 .messages-display-container {
   position: relative !important;
   top: 6rem;
-  flex-direction: column !important;
   margin-left: 14rem;
   z-index: 0;
   height: 30rem;

@@ -1,6 +1,7 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-export default function App() {
+export default function CardComponent() {
   return (
     <div className="card">
       <div className="bg-image hover-overlay ripple" style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }}>
