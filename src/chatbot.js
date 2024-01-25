@@ -11,18 +11,19 @@ import Dots from './img/dot.svg';
 import './chatbot.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CardComponent from './components/CardComponent.js';
+import Beelavander from './img/bee-lavander.jpg';
 
 
 const BeeDetails = [
   {
-    type: 'Bee Type 1',
-    description: 'Description for Bee Type 1...',
-    image: './img/jan-meeus-SfFMhcekh24-unsplash.jpg',
+    image: { Beelavander },
+    type: 'Honeybees',
+    description: '🐝 Honeybees are social insects that live in colonies, with each colony consisting of a queen, worker bees, and drones.🌸 Pollination Power: Honeybees are essential pollinators, contributing to the reproduction of flowers, fruits, and vegetables.About one - third of the food we eat depends on pollination, and honeybees play a significant role in this process.',
   },
   {
-    type: 'Bee Type 2',
-    description: 'Description for Bee Type 2...',
     image: './img/aaron-burden-6csuZQ9oZcI-unsplash.jpg',
+    type: 'Bumblebees',
+    description: '🐝 Bumblebees are robust, fuzzy bees known for their distinctive black and yellow stripes. Unlike honeybees, bumblebee colonies are typically smaller and do not store large quantities of honey.🌸 Pollination Power: Bumblebees are excellent pollinators, crucial for the reproduction of many flowering plants, including crops like tomatoes, peppers, and berries.Their large, furry bodies help them carry and transfer pollen efficiently.',
   },
   // Add more bee details as needed
 ];
@@ -183,7 +184,7 @@ const Chatbot = () => {
         // Check if the current index is less than messageCount + 3 and the number of displayed items is less than 4
         if (index < messageCount + 3 && messageList.length % 4 !== 3) {
           // If it is, wait for 3 seconds
-          await delay(3000);
+          await delay(300);
           // Increment the index state
           setIndex((prevIndex) => prevIndex + 1);
           // Set the isTyping flag to true
@@ -220,22 +221,11 @@ const Chatbot = () => {
       setCharIndex(0);
       setMessage('');
 
-      // If the next message is a video, wait for it to finish playing before moving to the next
-      if (messages[index + 1].endsWith('.mp4')) {
-        setIsVideoPlaying(true);
-        await delay(3000); // Adjust the delay based on the video length
-        setIsVideoPlaying(false);
-      }
+      // ... other code
 
-      // Scroll up and keep the focus on the typing message
-      const messageContainer = document.querySelector('.messages-display-container');
-      messageContainer.scrollTop -= 30;
-
-      // Check if the messages are finished
-      if (index + 3 >= messages.length || (index >= messages.length - 1 && !isTyping)) {
-        // Set up for displaying bee cards
+      // Check if the messages are finished (excluding videos)
+      if (index + 3 >= messages.filter(message => !message.endsWith('.mp4')).length) {
         setDisplayBeeCards(true);
-        handleCardClick(); // Call handleCardClick when messages are finished
       }
     } else {
       console.log('End of messages');
@@ -255,9 +245,11 @@ const Chatbot = () => {
   };
   // Define a function that calls both handleCardClick and handleClick
   const handleNextButtonClick = () => {
-    handleCardClick(); // Call handleCardClick function
+    // Pass the correct index to handleCardClick function
+    handleCardClick(index - 3); // Subtract 3 to get the correct index for BeeDetails
     handleClick(); // Call handleClick function
   };
+
 
   // Return the JSX for rendering the Chatbot component
   return (
@@ -313,11 +305,13 @@ const Chatbot = () => {
                   key={index}
                   image={bee.image}
                   title={bee.type}
+                  body={bee.description}
                   onClick={() => handleCardClick(index)}
                 />
               ))}
             </div>
           )}
+
 
           {/* Overlay for detailed bee description */}
           {isOverlayOpen && selectedBee && (

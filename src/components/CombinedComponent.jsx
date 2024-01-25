@@ -1,5 +1,5 @@
 import React from 'react';
-import CardComponent from '../components/CardComponent';  // Adjust the path based on your project structure
+import CardComponent from './CardComponent';  // Adjust the path based on your project structure
 import Chatbot from '../chatbot';
 
 function CombinedComponent() {
