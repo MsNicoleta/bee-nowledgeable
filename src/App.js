@@ -8,7 +8,7 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/landing' element={<Landing />} />
+        <Route exact path='/' element={<Landing />} />
         <Route path='/chatbot' element={<Chatbot />} />
         <Route path='/combined' element={<CombinedComponent />} />
         <Route path='*' to='/' />
