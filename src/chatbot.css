@@ -104,8 +104,8 @@
 
 .messages-display-container {
   position: relative !important;
-  top: 12rem;
-  margin-left: 24rem;
+  top: 4rem;
+  margin-left: 22rem;
   z-index: 0;
   height: 30rem;
   overflow-y: auto;
@@ -122,6 +122,7 @@
   z-index: 2;
   text-align: left;
   border: none !important;
+  width: 80%;
 }
 
 
@@ -159,7 +160,7 @@ video {
   /* Increased z-index */
   position: relative;
   /* Ensure it's positioned */
-  margin-top: 24rem;
+  margin-top: 12rem;
   cursor: pointer;
   border: none !important;
 }

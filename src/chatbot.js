@@ -10,7 +10,7 @@ import beePollinating from './Video/bee_pollinating.mp4'
 import Dots from './img/dot.svg';
 import './chatbot.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import CardComponent from './components/CardComponent.js';
+import CardComponent from './components/CardComponent.jsx';
 import Beelavander from './img/bee-lavander.jpg';
 
 

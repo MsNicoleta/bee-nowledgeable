@@ -28,10 +28,15 @@
   background-color: #AD6202;
   color: aliceblue;
   font-family: 'Roboto Flex', sans-serif;
-  font-weight: 600;
+  font-weight: 400;
   font-size: 1rem;
-  border-radius: 10px;
+  border-radius: 8px;
   padding: 0.5rem;
+  text-decoration: none;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-top: 15rem;
+
 
   &:hover {
     background-color: #80671b;
@@ -44,6 +49,8 @@
 
 .title-card {
   padding-top: 0.3rem;
+  font-weight: bold;
+  font-size: 1rem;
 }
 
 .body-card {
@@ -51,4 +58,9 @@
   text-align: center;
   /* Center text content */
 
+}
+
+.description {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
