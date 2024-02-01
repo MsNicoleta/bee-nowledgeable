@@ -106,7 +106,8 @@
   text-align: center;
   margin-top: 0.5rem;
   font-size: 1rem;
-  font-family: 'Roboto Flex', sans-serif;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 500;
 
 
 }
@@ -207,11 +208,12 @@
   align-items: center;
   justify-content: center;
   color: aliceblue;
-  font-family: 'Roboto Flex', sans-serif;
   font-weight: 600;
   font-size: 1rem;
   border-radius: 30px;
   margin-top: 6rem;
   z-index: 2;
   cursor: pointer;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
 }

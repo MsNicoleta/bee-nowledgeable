@@ -1,85 +1,104 @@
-/* Base styling for the card */
-.the-card {
-  width: 100%;
-  /* Adjusted for responsiveness */
-  border: none !important;
-  background-color: #b78f17;
-  padding-bottom: 1rem;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
+ @import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Roboto+Flex:opsz,wght@8..144,100;8..144,200;8..144,300;8..144,400;8..144,500&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&display=swap');
 
-  margin: 1rem;
-  /* Adjusted for spacing between cards */
-}
+ /* Base styling for the card */
+ .the-card {
+   width: 100%;
+   /* Adjusted for responsiveness */
+   border: none !important;
+   background: #F9F2DD;
+   padding-bottom: 1rem;
+   border-radius: 20px;
+   display: flex;
+   flex-direction: column;
 
-.card-image img {
-  object-fit: cover;
-  width: 100%;
-  height: 15rem;
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
-  position: inherit;
-}
+   margin: 1rem;
+   /* Adjusted for spacing between cards */
+ }
 
-.more-button {
-  background-color: #AD6202;
-  color: aliceblue;
-  font-family: 'Roboto Flex', sans-serif;
-  font-weight: 400;
-  font-size: 1rem;
-  border-radius: 8px;
-  padding: 0.5rem;
-  text-decoration: none;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  margin-top: 1rem;
-  /* Adjusted for spacing */
-  cursor: pointer;
-  border: none !important;
+ .card-image img {
+   object-fit: cover;
+   width: 100%;
+   height: 15rem;
+   border-top-right-radius: 20px;
+   border-top-left-radius: 20px;
+   position: inherit;
+ }
 
-  &:hover {
-    background-color: #80671b;
-    color: aliceblue;
-  }
-}
+ .more-button {
+   background-color: #AD6202;
+   color: aliceblue;
+   font-family: 'Roboto Flex', sans-serif;
+   font-weight: 400;
+   font-size: 1rem;
+   border-radius: 15px;
+   padding: 0.5rem;
+   text-decoration: none;
+   width: 40%;
+   align-self: center;
+   margin-top: 1rem;
+   margin-bottom: 1rem;
 
-.title-card {
-  padding-top: 0.3rem;
-  font-weight: bold;
-  font-size: 1rem;
-}
+   font-family: 'Fredoka', sans-serif;
+   font-weight: 500;
 
-.body-card {
-  padding: 1rem;
-  text-align: center;
-}
+   /* Adjusted for spacing */
+   cursor: pointer;
+   border: none !important;
 
-.description {
-  margin-top: 1rem;
-  /* Adjusted for spacing */
-  margin-bottom: 1rem;
-  /* Adjusted for spacing */
-}
+   &:hover {
+     background-color: #80671b;
+     color: aliceblue;
+   }
+ }
 
-.card-container {
-  display: flex;
-  flex-wrap: wrap;
-  /* justify-content: center; */
-}
+ .title-card {
+   padding-top: 0.3rem;
+   font-weight: bold;
+   font-size: 1.5rem;
+   font-family: 'Fredoka', sans-serif;
+   font-weight: 600;
 
-/* Responsive styling for medium-sized screens */
-@media screen and (min-width: 600px) {
-  .the-card {
-    width: calc(33.33% - 2rem);
-    /* Three cards in a row with spacing */
-  }
-}
+ }
 
-/* Responsive styling for large-sized screens */
-@media screen and (min-width: 900px) {
-  .the-card {
-    width: calc(33.33% - 2rem);
-    /* Three cards in a row with spacing */
-  }
-}
+ .body-card {
+   padding: 1rem;
+   align-content: center;
+
+ }
+
+ .description {
+   margin-top: 2rem;
+   /* Adjusted for spacing */
+   /* Adjusted for spacing */
+   height: 9em;
+   font-size: 1rem;
+   color: #39170F;
+   font-family: 'Fredoka', sans-serif;
+   font-weight: 600;
+   line-height: 1.25;
+
+
+ }
+
+ .card-container {
+   display: flex;
+   flex-wrap: wrap;
+   /* justify-content: center; */
+ }
+
+ /* Responsive styling for medium-sized screens */
+ @media screen and (min-width: 600px) {
+   .the-card {
+     width: calc(33.33% - 2rem);
+     /* Three cards in a row with spacing */
+   }
+ }
+
+ /* Responsive styling for large-sized screens */
+ @media screen and (min-width: 900px) {
+   .the-card {
+     width: calc(33.33% - 2rem);
+     /* Three cards in a row with spacing */
+   }
+ }

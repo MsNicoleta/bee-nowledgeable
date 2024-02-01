@@ -105,7 +105,7 @@
 .messages-display-container {
   position: relative !important;
   top: 4rem;
-  margin-left: 22rem;
+  margin-left: 25rem;
   z-index: 0;
   height: 30rem;
   overflow-y: auto;
@@ -160,9 +160,11 @@ video {
   /* Increased z-index */
   position: relative;
   /* Ensure it's positioned */
-  margin-top: 12rem;
+  margin-top: 10rem;
   cursor: pointer;
   border: none !important;
+  font-family: 'Fredoka', sans-serif;
+  font-weight: 600;
 }
 
 

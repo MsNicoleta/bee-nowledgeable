@@ -20,7 +20,9 @@ const CardComponent = (props) => {
                 <h3 className="title-card">{value.title}</h3>
                 <p className="description">{value.description}</p>
                 {/* Additional content based on your needs */}
-                <a href={value.detailsLink} className="more-button">More</a>
+                <div href={value.detailsLink} className="more-button">
+                  More
+                </div>
               </div>
             </div>
           ))

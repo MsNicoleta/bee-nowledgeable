@@ -17,7 +17,7 @@ const BeeDetails = [
   {
     img: MiningBees,
     title: 'Mining Bees',
-    description: '🐝 Mining Bees are solitary bees known for their nesting behavior, where females dig tunnels in the ground to create individual nests.Solitary Dwellers: Unlike social bees, mining bees do not live in colonies.Each female bee creates her own nest, usually in sandy or loose soil.',
+    description: '🐝 Mining Bees are solitary bees known for their nesting behavior, where females dig tunnels in the ground to create individual nests.',
   },
   {
     img: Honeybees,
@@ -32,7 +32,7 @@ const BeeDetails = [
   {
     img: MiningBees,
     title: 'Mining Bees',
-    description: '🐝 Mining Bees are solitary bees known for their nesting behavior, where females dig tunnels in the ground to create individual nests.Solitary Dwellers: Unlike social bees, mining bees do not live in colonies.Each female bee creates her own nest, usually in sandy or loose soil.',
+    description: '🐝 Mining Bees are solitary bees known for their nesting behavior, where females dig tunnels in the ground to create individual nests.',
   },
 
 
