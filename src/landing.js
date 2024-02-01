@@ -16,7 +16,7 @@ const Landing = () => {
 
       <img src={Bee2} className="Bee-2" alt="bee" />
       <img src={Bee1} className="Bee-1" alt="bee" />
-      <div className="landing-title">
+      <div className="landing-title" >
         Bee Knowledgeable
       </div>
       <h3 className="landing-intro">Step into the world of bees.

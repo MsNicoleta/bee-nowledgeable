@@ -11,22 +11,11 @@ import Dots from './img/dot.svg';
 import './chatbot.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CardComponent from './components/CardComponent.jsx';
-import Beelavander from './img/bee-lavander.jpg';
+import BeeDetails from './components/mini-cardData.jsx'; // Replace with the path
 
 
-const BeeDetails = [
-  {
-    image: { Beelavander },
-    type: 'Honeybees',
-    description: '🐝 Honeybees are social insects that live in colonies, with each colony consisting of a queen, worker bees, and drones.🌸 Pollination Power: Honeybees are essential pollinators, contributing to the reproduction of flowers, fruits, and vegetables.About one - third of the food we eat depends on pollination, and honeybees play a significant role in this process.',
-  },
-  {
-    image: './img/aaron-burden-6csuZQ9oZcI-unsplash.jpg',
-    type: 'Bumblebees',
-    description: '🐝 Bumblebees are robust, fuzzy bees known for their distinctive black and yellow stripes. Unlike honeybees, bumblebee colonies are typically smaller and do not store large quantities of honey.🌸 Pollination Power: Bumblebees are excellent pollinators, crucial for the reproduction of many flowering plants, including crops like tomatoes, peppers, and berries.Their large, furry bodies help them carry and transfer pollen efficiently.',
-  },
-  // Add more bee details as needed
-];
+
+
 
 
 // Define the main Chatbot component
@@ -221,7 +210,7 @@ const Chatbot = () => {
       setCharIndex(0);
       setMessage('');
 
-      // ... other code
+
 
       // Check if the messages are finished (excluding videos)
       if (index + 3 >= messages.filter(message => !message.endsWith('.mp4')).length) {
@@ -235,7 +224,7 @@ const Chatbot = () => {
 
   // function sets the selected bee when a card is clicked and opens the overlay.
   const handleCardClick = (index) => {
-    setSelectedBee(BeeDetails[index]);
+    setSelectedBee(BeeDetails[index]); // Assuming BeeDetails is an array called "data"
     setIsOverlayOpen(true);
   };
 
@@ -255,7 +244,7 @@ const Chatbot = () => {
   return (
     <div className="chatbot-page">
       <img src={Bee1} className="chatbot-Bee-1" alt="bee" />
-      <div onClick={() => navigate('/landing')} className="chatbot-title">
+      <div onClick={() => navigate('/')} className="chatbot-title">
         Bee Knowledgeable
       </div>
       <img src={Flowers1} className="chatbot-page-Flowers2" alt="Flowers-background" />
@@ -300,15 +289,11 @@ const Chatbot = () => {
           })}
           {displayBeeCards && (
             <div className="bee-cards-container">
-              {BeeDetails.map((bee, index) => (
-                <CardComponent
-                  key={index}
-                  image={bee.image}
-                  title={bee.type}
-                  body={bee.description}
-                  onClick={() => handleCardClick(index)}
-                />
-              ))}
+              {/* Render CardComponent with BeeDetails data */}
+              <CardComponent
+                details={BeeDetails} // Pass BeeDetails as props
+                onClick={handleCardClick}
+              />
             </div>
           )}
 

@@ -1,25 +1,34 @@
-import React from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CardComponentStyle from '../Styles/CardComponentStyle.css';
-import Bee from "../img/bee-lavander.jpg";
 
-const CardComponent = () => {
+
+
+import React from 'react';
+
+const CardComponent = (props) => {
   return (
-    <div className="the-card">
-      <div className=" card-image" style={{ backgroundColor: 'rgba(251, 251, 251, 0.15)' }}>
-        <img src={Bee} alt='...' />
+    <>
+      <div className='card-container'>
+        {props.details ? (
+          props.details.map((value, index) => (
+            <div className="the-card" key={index} onClick={() => props.onClick(index)}>
+              <div className="card-image">
+                <img src={value.img} alt={value.title} />
+              </div>
+              <div className="body-card">
+                <h3 className="title-card">{value.title}</h3>
+                <p className="description">{value.description}</p>
+                {/* Additional content based on your needs */}
+                <a href={value.detailsLink} className="more-button">More</a>
+              </div>
+            </div>
+          ))
+        ) : null}
       </div>
-      <div className="body-card">
-        <h5 className="title-card">Card title</h5>
-        <p className="description">
-          Some quick example text to build on the card title and make up the bulk of the card's content.
-          Some quick example text to build on the card title and make up the bulk of the card's content.
-        </p>
-        <a href="#" className="more-button">More</a>
-      </div>
-    </div>
+    </>
+
   );
-}
+};
 
 export default CardComponent;
