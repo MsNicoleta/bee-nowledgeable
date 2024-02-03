@@ -45,15 +45,14 @@ const Chatbot = () => {
     'Bees are not just cute and fuzzy insects; they play a crucial role in our world.',
     'You see, bees are fantastic pollinators.',
     'Bees help plants make seeds by carrying pollen from one flower to another, helping them grow and reproduce.',
-    // 'Nice to meet you!',
-    // 'In fact, one out of every three bites of food you eat is thanks to a bee!',
-    // // beeFarm,
-    // 'But bees aren\'t just busy at work; they\'re also part of a big team.',
-    // 'Honeybees, for example, live in colonies and work together to build hives, gather food, and take care of their queen. ',
-    // 'Teamwork makes the dream work, right?',
-    // 'So, next time you see a bee buzzing by, remember to say a little thank you!',
-    // 'They might be small, but they sure do a big job in keeping our planet blooming and delicious. 🌸🍯',
-    // 'Keep on buzzing with curiosity, and let\'s continue learning about the amazing world of bees! 🐝✨'
+    'In fact, one out of every three bites of food you eat is thanks to a bee!',
+    beeFarm,
+    'But bees aren\'t just busy at work; they\'re also part of a big team.',
+    'Honeybees, for example, live in colonies and work together to build hives, gather food, and take care of their queen. ',
+    'Teamwork makes the dream work, right?',
+    'So, next time you see a bee buzzing by, remember to say a little thank you!',
+    'They might be small, but they sure do a big job in keeping our planet blooming and delicious. 🌸🍯',
+    'Keep on buzzing with curiosity, and let\'s continue learning about the amazing world of bees! 🐝✨'
   ];
 
   // Event handlers for video play and pause
