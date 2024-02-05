@@ -110,3 +110,11 @@
      /* Three cards in a row with spacing */
    }
  }
+
+ .bee-cards-container {
+   display: flex;
+   justify-content: space-around;
+   /* Adjust as needed */
+   margin-top: 20px;
+   /* Adjust as needed */
+ }

@@ -303,7 +303,7 @@ const Chatbot = () => {
               <div className="overlay-content">
                 <img src={selectedBee.image} alt={selectedBee.type} />
                 <h2>{selectedBee.type}</h2>
-                <p>{selectedBee.description}</p>
+                {/* <p>{selectedBee.description}</p> */}
               </div>
             </div>
           )}
