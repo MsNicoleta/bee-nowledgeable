@@ -31,10 +31,10 @@
    font-family: 'Roboto Flex', sans-serif;
    font-weight: 400;
    font-size: 1rem;
-   border-radius: 15px;
+   border-radius: 20px;
    padding: 0.5rem;
    text-decoration: none;
-   width: 40%;
+   width: 30%;
    align-self: center;
    margin-bottom: 1rem;
 
@@ -92,6 +92,7 @@
    display: flex;
    flex-wrap: wrap;
    width: 85%;
+
    /* justify-content: center; */
  }
 
@@ -112,9 +113,9 @@
  }
 
  .bee-cards-container {
+
    display: flex;
-   justify-content: space-around;
-   /* Adjust as needed */
-   margin-top: 20px;
-   /* Adjust as needed */
+   justify-content: start;
+   width: 80%;
+   bottom: 0;
  }

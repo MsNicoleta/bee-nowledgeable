@@ -31,7 +31,10 @@ const Chatbot = () => {
   const lastMessageRef = useRef(null);
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [selectedBee, setSelectedBee] = useState(null);
-  const [displayBeeCards, setDisplayBeeCards] = useState(false);
+  const [displayBeeCards, setDisplayBeeCards] = useState(false); // Flag to indicate if the bee cards should be displayed
+  const [beeCards, setBeeCards] = useState([]); // Array of bee cards
+
+
 
 
 
@@ -45,14 +48,14 @@ const Chatbot = () => {
     'Bees are not just cute and fuzzy insects; they play a crucial role in our world.',
     'You see, bees are fantastic pollinators.',
     'Bees help plants make seeds by carrying pollen from one flower to another, helping them grow and reproduce.',
-    'In fact, one out of every three bites of food you eat is thanks to a bee!',
-    beeFarm,
-    'But bees aren\'t just busy at work; they\'re also part of a big team.',
-    'Honeybees, for example, live in colonies and work together to build hives, gather food, and take care of their queen. ',
-    'Teamwork makes the dream work, right?',
-    'So, next time you see a bee buzzing by, remember to say a little thank you!',
-    'They might be small, but they sure do a big job in keeping our planet blooming and delicious. 🌸🍯',
-    'Keep on buzzing with curiosity, and let\'s continue learning about the amazing world of bees! 🐝✨'
+    // 'In fact, one out of every three bites of food you eat is thanks to a bee!',
+    // beeFarm,
+    // 'But bees aren\'t just busy at work; they\'re also part of a big team.',
+    // 'Honeybees, for example, live in colonies and work together to build hives, gather food, and take care of their queen. ',
+    // 'Teamwork makes the dream work, right?',
+    // 'So, next time you see a bee buzzing by, remember to say a little thank you!',
+    // 'They might be small, but they sure do a big job in keeping our planet blooming and delicious. 🌸🍯',
+    // 'Keep on buzzing with curiosity, and let\'s continue learning about the amazing world of bees! 🐝✨'
   ];
 
   // Event handlers for video play and pause
@@ -144,7 +147,6 @@ const Chatbot = () => {
 
 
   // Function to simulate typing messages
-  // This is an async function that types a message character by character
   const typeMessage = async () => {
     // Check if the isTyping flag is true
     if (isTyping) {
@@ -162,7 +164,7 @@ const Chatbot = () => {
 
         // Check if the current message is not empty
         if (messages[index].trim() !== '') {
-          // Unshift the current message to the beginning of the messageList
+          // Append the current message to the beginning of the messageList
           setMessageList((prevMessageList) => [messages[index], ...prevMessageList]);
         }
 
@@ -172,7 +174,7 @@ const Chatbot = () => {
         // Check if the current index is less than messageCount + 3 and the number of displayed items is less than 4
         if (index < messageCount + 3 && messageList.length % 4 !== 3) {
           // If it is, wait for 3 seconds
-          await delay(300);
+          await delay(20);
           // Increment the index state
           setIndex((prevIndex) => prevIndex + 1);
           // Set the isTyping flag to true
@@ -231,8 +233,29 @@ const Chatbot = () => {
   const closeOverlay = () => {
     setIsOverlayOpen(false);
   };
-  // Define a function that calls both handleCardClick and handleClick
+
+  // const handleNextButtonClick = async () => {
+  //   // Check if all the messages are displayed
+  //   if (index === messages.length - 1) {
+  //     // If all the messages are displayed, add the bee cards to the beginning of the messageList
+  //     setMessageList((prevMessageList) => [beeCards, ...prevMessageList]);
+  //     setDisplayBeeCards(true);
+  //   } else {
+  //     // If not, continue displaying the messages
+  //     setIsTyping(true);
+  //     setIndex((prevIndex) => prevIndex + 1);
+  //     setCharIndex(0);
+  //   }
+  // };
+
+
   const handleNextButtonClick = () => {
+    // Check if all the messages are displayed
+    if (index === messageList.length - 1) {
+      // If all the messages are displayed, display the bee-cards-container
+      setDisplayBeeCards(true);
+    }
+
     // Pass the correct index to handleCardClick function
     handleCardClick(index - 3); // Subtract 3 to get the correct index for BeeDetails
     handleClick(); // Call handleClick function
@@ -251,11 +274,12 @@ const Chatbot = () => {
         <img src={AiIcon} className="AiIcon" alt="AiIcon" />
         {isTyping ? <img src={Dots} className="dots" alt="Dots" /> : null}
 
-        <div className="messages-display-container" style={{ overflowY: 'scroll', display: 'flex', flexDirection: 'column-reverse' }}>
+        <div className="messages-display-container" >
+          <div></div>
           {/* Render the current typing message */}
           {message.trim() !== '' && (
-            <div className="new-message-container" ref={lastMessageRef} style={{ maxWidth: `${message.length * 12}px` }}>
-              <p className="chatbot-message">{message}</p>
+            <div className="new-message-container" ref={lastMessageRef} style={{ maxWidth: `${message.length * 9.85}px` }}>
+              <div className="chatbot-message">{message}</div>
             </div>
           )}
           {/* Render each message in the messageList array */}
@@ -275,28 +299,16 @@ const Chatbot = () => {
                     onPause={handleVideoPause}
                   />
                 </div>
-
               );
             } else {
               // If the message is text, render a div with the text message
               return (
-                <div key={index} className="new-message-container message-container" style={{ maxWidth: `${item.length * 10.5}px` }}>
-                  <p className="chatbot-message">{item}</p>
+                <div key={index} className="new-message-container message-container" style={{ maxWidth: `${item.length * 9.25}px` }}>
+                  <div className="chatbot-message">{item}</div>
                 </div>
               );
             }
           })}
-          {displayBeeCards && (
-            <div className="bee-cards-container">
-              {/* Render CardComponent with BeeDetails data */}
-              <CardComponent
-                details={BeeDetails} // Pass BeeDetails as props
-                onClick={handleCardClick}
-              />
-            </div>
-          )}
-
-
           {/* Overlay for detailed bee description */}
           {isOverlayOpen && selectedBee && (
             <div className="overlay" onClick={closeOverlay}>
@@ -308,7 +320,18 @@ const Chatbot = () => {
             </div>
           )}
 
+          {/* Render CardComponent with BeeDetails data */}
+          {displayBeeCards && (
+            <div className="bee-cards-container">
+              <CardComponent
+                details={BeeDetails}
+                onClick={handleCardClick}
+              />
+            </div>
+          )}
         </div>
+
+
 
       </div>
 
