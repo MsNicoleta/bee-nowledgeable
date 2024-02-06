@@ -134,7 +134,15 @@ const Chatbot = () => {
     }
   };
 
-
+  // Add this useEffect hook to listen for changes in the messageList array
+  useEffect(() => {
+    if (messageList.length > 0) {
+      const lastItem = messageList[messageList.length - 1];
+      if (Array.isArray(lastItem)) {
+        setDisplayBeeCards(true);
+      }
+    }
+  }, [messageList]);
 
 
   // Utility function for delaying execution
@@ -151,7 +159,8 @@ const Chatbot = () => {
     // Check if the isTyping flag is true
     if (isTyping) {
       // Check if the charIndex is less than the length of the current message
-      if (charIndex < messages[index].length) {
+      if (index < messages.length && charIndex < messages[index].length) {
+
         // Wait for 30 milliseconds
         await delay(30);
         // Append the current character to the message state
@@ -249,17 +258,29 @@ const Chatbot = () => {
   // };
 
 
-  const handleNextButtonClick = () => {
+  const handleNextButtonClick = async () => {
     // Check if all the messages are displayed
-    if (index === messageList.length - 1) {
-      // If all the messages are displayed, display the bee-cards-container
+    if (index === messages.length - 1) {
+      // If all the messages are displayed, add the bee cards to the beginning of the messageList
+      setMessageList((prevMessageList) => [beeCards, ...prevMessageList]);
       setDisplayBeeCards(true);
+    } else {
+      handleCardClick(index - 3); // Subtract 3 to get the correct index for BeeDetails
+      handleClick(); // Call handleClick function
     }
-
-    // Pass the correct index to handleCardClick function
-    handleCardClick(index - 3); // Subtract 3 to get the correct index for BeeDetails
-    handleClick(); // Call handleClick function
   };
+
+  // const handleNextButtonClick = () => {
+  //   // Check if all the messages are displayed
+  //   if (index === messageList.length - 1) {
+  //     // If all the messages are displayed, display the bee-cards-container
+  //     setDisplayBeeCards(true);
+  //   }
+
+  //   // Pass the correct index to handleCardClick function
+  //   handleCardClick(index - 3); // Subtract 3 to get the correct index for BeeDetails
+  //   handleClick(); // Call handleClick function
+  // };
 
 
   // Return the JSX for rendering the Chatbot component
@@ -275,7 +296,17 @@ const Chatbot = () => {
         {isTyping ? <img src={Dots} className="dots" alt="Dots" /> : null}
 
         <div className="messages-display-container" >
-          <div></div>
+          <div>
+            {/* Render CardComponent with BeeDetails data */}
+            {displayBeeCards && (
+              <div className="bee-cards-container">
+                <CardComponent
+                  details={BeeDetails}
+                  onClick={handleCardClick}
+                />
+              </div>
+            )}
+          </div>
           {/* Render the current typing message */}
           {message.trim() !== '' && (
             <div className="new-message-container" ref={lastMessageRef} style={{ maxWidth: `${message.length * 9.85}px` }}>
@@ -283,32 +314,34 @@ const Chatbot = () => {
             </div>
           )}
           {/* Render each message in the messageList array */}
-          {messageList.map((item, index) => {
-            if (item.endsWith('.mp4')) {
-              // If the message is a video, render the ReactPlayer component
-              return (
-                <div key={index} className="video-display-container">
-                  <ReactPlayer
-                    key={`video-${index}`}
-                    url={item}
-                    controls
-                    width="320"
-                    height="240"
-                    playing={isVideoPlaying}
-                    onPlay={handleVideoPlay}
-                    onPause={handleVideoPause}
-                  />
-                </div>
-              );
-            } else {
-              // If the message is text, render a div with the text message
-              return (
-                <div key={index} className="new-message-container message-container" style={{ maxWidth: `${item.length * 9.25}px` }}>
-                  <div className="chatbot-message">{item}</div>
-                </div>
-              );
-            }
-          })}
+          {messageList
+            .filter((item) => typeof item === 'string')
+            .map((item, index) => {
+              if (item.endsWith('.mp4')) {
+                // If the message is a video, render the ReactPlayer component
+                return (
+                  <div key={index} className="video-display-container">
+                    <ReactPlayer
+                      key={`video-${index}`}
+                      url={item}
+                      controls
+                      width="320"
+                      height="240"
+                      playing={isVideoPlaying}
+                      onPlay={handleVideoPlay}
+                      onPause={handleVideoPause}
+                    />
+                  </div>
+                );
+              } else {
+                // If the message is text, render a div with the text message
+                return (
+                  <div key={index} className="new-message-container message-container" style={{ maxWidth: `${item.length * 9.25}px` }}>
+                    <div className="chatbot-message">{item}</div>
+                  </div>
+                );
+              }
+            })}
           {/* Overlay for detailed bee description */}
           {isOverlayOpen && selectedBee && (
             <div className="overlay" onClick={closeOverlay}>
@@ -320,15 +353,7 @@ const Chatbot = () => {
             </div>
           )}
 
-          {/* Render CardComponent with BeeDetails data */}
-          {displayBeeCards && (
-            <div className="bee-cards-container">
-              <CardComponent
-                details={BeeDetails}
-                onClick={handleCardClick}
-              />
-            </div>
-          )}
+
         </div>
 
 
