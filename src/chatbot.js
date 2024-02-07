@@ -33,6 +33,7 @@ const Chatbot = () => {
   const [selectedBee, setSelectedBee] = useState(null);
   const [displayBeeCards, setDisplayBeeCards] = useState(false); // Flag to indicate if the bee cards should be displayed
   const [beeCards, setBeeCards] = useState([]); // Array of bee cards
+  const [selectedBeeIndex, setSelectedBeeIndex] = useState(0);
 
 
 
@@ -238,10 +239,16 @@ const Chatbot = () => {
     setIsOverlayOpen(true);
   };
 
-  // define a function to close the overlay
+  // // define a function to close the overlay
   const closeOverlay = () => {
     setIsOverlayOpen(false);
   };
+
+  const handleOverlay = () => {
+    setIsOverlayOpen(!isOverlayOpen);
+  };
+
+
 
   // const handleNextButtonClick = async () => {
   //   // Check if all the messages are displayed
@@ -281,6 +288,10 @@ const Chatbot = () => {
   //   handleCardClick(index - 3); // Subtract 3 to get the correct index for BeeDetails
   //   handleClick(); // Call handleClick function
   // };
+  const handleNextBeeButtonClick = () => {
+    setSelectedBeeIndex((prevIndex) => (prevIndex + 1) % BeeDetails.length);
+  };
+
 
 
   // Return the JSX for rendering the Chatbot component
@@ -297,15 +308,7 @@ const Chatbot = () => {
 
         <div className="messages-display-container" >
           <div>
-            {/* Render CardComponent with BeeDetails data */}
-            {displayBeeCards && (
-              <div className="bee-cards-container">
-                <CardComponent
-                  details={BeeDetails}
-                  onClick={handleCardClick}
-                />
-              </div>
-            )}
+
           </div>
           {/* Render the current typing message */}
           {message.trim() !== '' && (
@@ -356,7 +359,15 @@ const Chatbot = () => {
 
         </div>
 
-
+        {/* Render CardComponent with BeeDetails data */}
+        {displayBeeCards && (
+          <div className="bee-cards-container">
+            <CardComponent
+              details={BeeDetails}
+              onClick={handleCardClick}
+            />
+          </div>
+        )}
 
       </div>
 

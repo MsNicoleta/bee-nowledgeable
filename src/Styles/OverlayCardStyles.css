@@ -1,0 +1,90 @@
+/* Overlay card styles */
+
+/* Overlay background */
+.overlay-background {
+  position: fixed;
+  /* Overlay takes the whole screen */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  /* Ensures the overlay is above other content */
+}
+
+/* Overlay card */
+.overlay-card {
+  background: #F9F2DD;
+  border-radius: 20px;
+  padding: 2rem;
+  width: 80%;
+  /* Adjust width as needed */
+  max-width: 640px;
+  /* Maximum width */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1001;
+  /* Ensures the card is above the overlay background */
+}
+
+/* Overlay image */
+.overlay-card .card-image img {
+  height: auto;
+  border-radius: 20px;
+}
+
+/* Overlay card content */
+.overlay-card .card-content {
+  padding: 1rem;
+}
+
+/* Overlay card title */
+.overlay-card .title-card {
+  margin-top: 1rem;
+  font-size: 2rem;
+  /* Larger font size for title */
+}
+
+/* Overlay card description */
+.overlay-card .description {
+  margin-top: 1rem;
+  font-size: 1rem;
+  /* Adjust font size as needed */
+  color: #39170F;
+  line-height: 1.5;
+  /* Increased line height for readability */
+}
+
+/* Overlay card button */
+.overlay-card .more-button {
+  margin-top: 2rem;
+  /* Space above the button */
+  width: 50%;
+  /* Wider button for better interaction */
+  align-self: center;
+  /* Center the button */
+}
+
+/* Close button for overlay */
+.overlay-card .close-button {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #AD6202;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.5rem;
+  cursor: pointer;
+}
+
+/* Hover effect for the close button */
+.overlay-card .close-button:hover {
+  background-color: #e98400;
+}

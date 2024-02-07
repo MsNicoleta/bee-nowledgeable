@@ -19,7 +19,7 @@
  .card-image img {
    object-fit: cover;
    width: 100%;
-   height: 12rem;
+   height: 8rem;
    border-top-right-radius: 20px;
    border-top-left-radius: 20px;
    position: inherit;
@@ -116,6 +116,7 @@
 
    display: flex;
    justify-content: start;
-   width: 80%;
+   width: 75%;
+   height: 50%;
    bottom: 0;
  }
