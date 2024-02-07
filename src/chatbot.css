@@ -104,10 +104,10 @@
 
 .messages-display-container {
   position: relative !important;
-  top: 3rem;
+  top: 2rem;
   margin-left: 20rem;
   z-index: 0;
-  height: 40rem !important;
+  height: 37rem !important;
   overflow-y: auto;
   display: flex;
   flex-direction: column-reverse;
@@ -118,19 +118,6 @@
   position: relative;
   height: 400px;
 }
-
-.messages-display-container::before {
-  content: '';
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2rem;
-  background: linear-gradient(to top, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
-  z-index: 1;
-}
-
-
 
 
 
@@ -182,7 +169,7 @@ video {
   /* Increased z-index */
   position: relative;
   /* Ensure it's positioned */
-  margin-top: 10rem;
+  margin-top: 5rem;
   cursor: pointer;
   border: none !important;
   font-family: 'Fredoka', sans-serif;

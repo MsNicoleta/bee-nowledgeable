@@ -1,7 +1,8 @@
 import React from 'react';
-import './OverlayCardStyles.css'; // Assuming you have a corresponding CSS file for styles
+import OverlayCardStyle from '../Styles/OverlayCardStyles.css';
+// Assuming you have a corresponding CSS file for styles
 
-const OverlayCard = ({ isOpen, closeOverlay, beeDetail }) => {
+const OverlayCard = ({ isOpen, closeOverlay, overlayBeeDetails }) => {
   if (!isOpen) return null;
 
   return (
@@ -10,18 +11,52 @@ const OverlayCard = ({ isOpen, closeOverlay, beeDetail }) => {
         <button className="close-button" onClick={closeOverlay}>X</button>
         <div className="overlay-content">
           <div className="card-image">
-            <img src={beeDetail.img} alt={beeDetail.title} />
+            <img src={overlayBeeDetails.img} alt={overlayBeeDetails.title} />
           </div>
-          <h3 className="title">{beeDetail.title}</h3>
-          <p className="description">{beeDetail.description}</p>
+          <h3 className="title">{overlayBeeDetails.title}</h3>
+          <p className="description">{overlayBeeDetails.description}</p>
           {/* Additional content */}
         </div>
       </div>
     </div>
   );
 };
-
 export default OverlayCard;
+
+
+
+// const CardComponent = (props) => {
+//   return (
+//     <>
+//       <div className='card-container'>
+//         {props.details ? (
+//           props.details.map((value, index) => (
+//             <div className="the-card" key={index} onClick={() => props.onClick(index)}>
+//               <div className="card-image">
+//                 <img src={value.img} alt={value.title} />
+//               </div>
+//               <div className="body-card">
+//                 <h3 className="title-card">{value.title}</h3>
+//                 <p className="description">{value.description}</p>
+//                 {/* Additional content based on your needs */}
+//                 <div className="button-card">
+//                   <div href={value.detailsLink} className="more-button">
+//                     More
+//                   </div>
+//                 </div>
+//               </div>
+//             </div>
+//           ))
+//         ) : null}
+//       </div>
+//     </>
+
+//   );
+// };
+
+// export default CardComponent;
+
+
 
 // import React from 'react';
 

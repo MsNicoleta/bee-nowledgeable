@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from './CardComponent';  // Adjust the path based on your project structure
+import Overlay from './OverlayCard';  // Adjust the path based on your project structure
 import Chatbot from '../chatbot';
 
 function CombinedComponent() {
@@ -10,6 +11,9 @@ function CombinedComponent() {
       </div>
       <div>
         <Chatbot />
+      </div>
+      <div>
+        <Overlay />
       </div>
     </>
   );

@@ -11,6 +11,7 @@ import Dots from './img/dot.svg';
 import './chatbot.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CardComponent from './components/CardComponent.jsx';
+import OverlayCard from './components/OverlayCard.jsx';
 import BeeDetails from './components/mini-cardData.jsx'; // Replace with the path
 
 
@@ -308,6 +309,15 @@ const Chatbot = () => {
 
         <div className="messages-display-container" >
           <div>
+            {/* Render CardComponent with BeeDetails data */}
+            {displayBeeCards && (
+              <div className="bee-cards-container">
+                <CardComponent
+                  details={BeeDetails}
+                  onClick={handleCardClick}
+                />
+              </div>
+            )}
 
           </div>
           {/* Render the current typing message */}
@@ -359,15 +369,7 @@ const Chatbot = () => {
 
         </div>
 
-        {/* Render CardComponent with BeeDetails data */}
-        {displayBeeCards && (
-          <div className="bee-cards-container">
-            <CardComponent
-              details={BeeDetails}
-              onClick={handleCardClick}
-            />
-          </div>
-        )}
+
 
       </div>
 

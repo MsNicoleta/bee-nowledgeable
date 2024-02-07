@@ -3,7 +3,7 @@ import Bumblebees from '../img/Bumblebees.jpg';
 import MiningBees from '../img/Mining-Bee.jpg';
 
 
-const BeeDetails = [
+const OverlayBeeDetails = [
   {
     img: Honeybees,
     title: 'Honeybees',
@@ -34,4 +34,4 @@ const BeeDetails = [
   // Add more bee details as needed
 ];
 
-export default BeeDetails
+export default OverlayBeeDetails
