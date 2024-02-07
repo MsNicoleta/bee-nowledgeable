@@ -40,6 +40,7 @@ const Chatbot = () => {
 
 
 
+
   // Messages array containing text and video messages
   const messages = [
     'Hey there, curious minds! Lets dive into the world of Bees 🌼🐝🌻',
@@ -235,12 +236,11 @@ const Chatbot = () => {
 
 
   // function sets the selected bee when a card is clicked and opens the overlay.
-  const handleCardClick = (index) => {
-    setSelectedBee(BeeDetails[index]); // Assuming BeeDetails is an array called "data"
+  const handleCardClick = (overlayBeeDetails) => {
+    setSelectedBee(overlayBeeDetails);
     setIsOverlayOpen(true);
   };
 
-  // // define a function to close the overlay
   const closeOverlay = () => {
     setIsOverlayOpen(false);
   };
@@ -248,6 +248,7 @@ const Chatbot = () => {
   const handleOverlay = () => {
     setIsOverlayOpen(!isOverlayOpen);
   };
+
 
 
 
@@ -317,6 +318,13 @@ const Chatbot = () => {
                   onClick={handleCardClick}
                 />
               </div>
+            )}
+
+            {isOverlayOpen && selectedBee && (
+              <BeeOverlayCard
+                overlayBeeDetails={selectedBee}
+                closeOverlay={closeOverlay}
+              />
             )}
 
           </div>

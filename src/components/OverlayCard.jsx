@@ -1,9 +1,8 @@
 import React from 'react';
 import OverlayCardStyle from '../Styles/OverlayCardStyles.css';
-// Assuming you have a corresponding CSS file for styles
 
-const OverlayCard = ({ isOpen, closeOverlay, overlayBeeDetails }) => {
-  if (!isOpen) return null;
+const BeeOverlayCard = ({ overlayBeeDetails, closeOverlay }) => {
+  if (!overlayBeeDetails) return null;
 
   return (
     <div className="overlay">
@@ -21,7 +20,8 @@ const OverlayCard = ({ isOpen, closeOverlay, overlayBeeDetails }) => {
     </div>
   );
 };
-export default OverlayCard;
+
+export default BeeOverlayCard;
 
 
 
