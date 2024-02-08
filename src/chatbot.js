@@ -282,7 +282,7 @@ const Chatbot = () => {
       setMessageList((prevMessageList) => [beeCards, ...prevMessageList]);
       setDisplayBeeCards(true);
     } else {
-      handleCardClick(index - 3); // Subtract 3 to get the correct index for BeeDetails
+      handleCardClick(index - 1); // Subtract 3 to get the correct index for BeeDetails
       handleClick(); // Call handleClick function
     }
   };
