@@ -22,6 +22,8 @@ const CardComponent = (props) => {
                 {/* Additional content based on your needs */}
                 <div className="button-card">
                   <div href={value.detailsLink} className="more-button">
+                    {/* <div href="#" className="more-button" onClick={() => props.onClick(overlayBeeDetails)}> */}
+
                     More
                   </div>
                 </div>

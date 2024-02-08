@@ -22,9 +22,11 @@
   background: #F9F2DD;
   border-radius: 20px;
   padding: 2rem;
-  width: 80%;
+  width: 90%;
+  margin-top: 8rem;
   /* Adjust width as needed */
-  max-width: 640px;
+  max-width: 70rem;
+  height: 35rem;
   /* Maximum width */
   display: flex;
   flex-direction: column;
@@ -76,8 +78,8 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: #AD6202;
-  color: #fff;
+  background: #F9F2DD;
+  /* color: #fff; */
   border: none;
   border-radius: 10px;
   padding: 0.5rem;
@@ -86,5 +88,5 @@
 
 /* Hover effect for the close button */
 .overlay-card .close-button:hover {
-  background-color: #e98400;
+  background-color: #ffb95e;
 }

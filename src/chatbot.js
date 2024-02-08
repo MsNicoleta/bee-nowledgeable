@@ -11,7 +11,7 @@ import Dots from './img/dot.svg';
 import './chatbot.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CardComponent from './components/CardComponent.jsx';
-import OverlayCard from './components/OverlayCard.jsx';
+import BeeOverlayCard from './components/OverlayCard.jsx';
 import BeeDetails from './components/mini-cardData.jsx'; // Replace with the path
 
 
@@ -243,8 +243,7 @@ const Chatbot = () => {
 
   const closeOverlay = () => {
     setIsOverlayOpen(false);
-  };
-
+  }
   const handleOverlay = () => {
     setIsOverlayOpen(!isOverlayOpen);
   };

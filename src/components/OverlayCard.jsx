@@ -4,16 +4,18 @@ import OverlayCardStyle from '../Styles/OverlayCardStyles.css';
 const BeeOverlayCard = ({ overlayBeeDetails, closeOverlay }) => {
   if (!overlayBeeDetails) return null;
 
+  const { img, title, description } = overlayBeeDetails;
+
   return (
     <div className="overlay">
       <div className="overlay-card">
-        <button className="close-button" onClick={closeOverlay}>X</button>
+        <button className="close-button" onClick={closeOverlay}>❌</button>
         <div className="overlay-content">
           <div className="card-image">
-            <img src={overlayBeeDetails.img} alt={overlayBeeDetails.title} />
+            <img src={img} alt={title} />
           </div>
-          <h3 className="title">{overlayBeeDetails.title}</h3>
-          <p className="description">{overlayBeeDetails.description}</p>
+          <h3 className="title">{title}</h3>
+          <p className="description">{description}</p>
           {/* Additional content */}
         </div>
       </div>
@@ -58,9 +60,8 @@ export default BeeOverlayCard;
 
 
 
-// import React from 'react';
 
-// const OverlayCard = ({ img, title, description, handleOverlay }) => {
+// const BeeOverlayCard = ({ img, title, description, handleOverlay }) => {
 //   return (
 //     <div className="overlay-card">
 //       <img src={img} alt={title} />
@@ -71,4 +72,4 @@ export default BeeOverlayCard;
 //   );
 // };
 
-// export default OverlayCard;
+// export default BeeOverlayCard;
