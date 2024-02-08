@@ -13,7 +13,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import CardComponent from './components/CardComponent.jsx';
 import BeeDetails from './components/mini-cardData.jsx'; // Replace with the path
 import BeeOverlayCard from './components/OverlayCard.jsx';
-import OverlayBeeDetails from './components/large-cardData.jsx';
+import OverlayBeeDetails from './components/large-cardData.jsx'; // Replace with the path
+
 
 
 
@@ -31,12 +32,12 @@ const Chatbot = () => {
   const [isVideoPlaying, setIsVideoPlaying] = React.useState(false) // Flag to indicate if a video is currently playing
   const [messageCount, setMessageCount] = useState(0); // Counter for messages
   const lastMessageRef = useRef(null);
-  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [selectedBee, setSelectedBee] = useState(null);
   const [displayBeeCards, setDisplayBeeCards] = useState(false); // Flag to indicate if the bee cards should be displayed
   const [beeCards, setBeeCards] = useState([]); // Array of bee cards
   const [selectedBeeIndex, setSelectedBeeIndex] = useState(0);
-
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const [overlayBeeDetailsArray, setOverlayBeeDetailsArray] = useState([]);
 
 
 
@@ -235,10 +236,16 @@ const Chatbot = () => {
   };
 
 
-  // function sets the selected bee when a card is clicked and opens the overlay.
+  // // function sets the selected bee when a card is clicked and opens the overlay.
+  // const handleCardClick = (index) => {
+  //   setSelectedBee(BeeDetails[index]); // Assuming BeeDetails is an array called "data"
+  //   setIsOverlayOpen(true);
+  // };
+
   const handleCardClick = (index) => {
-    setSelectedBee(BeeDetails[index]); // Assuming BeeDetails is an array called "data"
+    setSelectedBee(OverlayBeeDetails[index]);
     setIsOverlayOpen(true);
+    // setOverlayBeeDetails(OverlayBeeDetails); // Pass the OverlayBeeDetails array as a prop
   };
 
 
@@ -331,10 +338,8 @@ const Chatbot = () => {
             )}
 
             {isOverlayOpen && selectedBee && (
-              <BeeOverlayCard
-                overlayBeeDetails={selectedBee}
-                closeOverlay={closeOverlay}
-              />
+              <BeeOverlayCard overlayBeeDetails={selectedBee} closeOverlay={closeOverlay} overlayBeeDetailsArray={overlayBeeDetailsArray} />
+
             )}
 
           </div>
