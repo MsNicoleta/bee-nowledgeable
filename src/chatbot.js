@@ -11,8 +11,9 @@ import Dots from './img/dot.svg';
 import './chatbot.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import CardComponent from './components/CardComponent.jsx';
-import BeeOverlayCard from './components/OverlayCard.jsx';
 import BeeDetails from './components/mini-cardData.jsx'; // Replace with the path
+import BeeOverlayCard from './components/OverlayCard.jsx';
+import OverlayBeeDetails from './components/large-cardData.jsx';
 
 
 
@@ -35,7 +36,6 @@ const Chatbot = () => {
   const [displayBeeCards, setDisplayBeeCards] = useState(false); // Flag to indicate if the bee cards should be displayed
   const [beeCards, setBeeCards] = useState([]); // Array of bee cards
   const [selectedBeeIndex, setSelectedBeeIndex] = useState(0);
-
 
 
 
@@ -236,18 +236,20 @@ const Chatbot = () => {
 
 
   // function sets the selected bee when a card is clicked and opens the overlay.
-  const handleCardClick = (overlayBeeDetails) => {
-    setSelectedBee(overlayBeeDetails);
+  const handleCardClick = (index) => {
+    setSelectedBee(BeeDetails[index]); // Assuming BeeDetails is an array called "data"
     setIsOverlayOpen(true);
   };
 
+
+  // // define a function to close the overlay
   const closeOverlay = () => {
     setIsOverlayOpen(false);
-  }
+  };
+
   const handleOverlay = () => {
     setIsOverlayOpen(!isOverlayOpen);
   };
-
 
 
 
@@ -293,6 +295,11 @@ const Chatbot = () => {
     setSelectedBeeIndex((prevIndex) => (prevIndex + 1) % BeeDetails.length);
   };
 
+  const moreBeeDetailsButton = (overlayBeeDetails) => {
+    setSelectedBee(overlayBeeDetails);
+    setIsOverlayOpen(true);
+  };
+
 
 
   // Return the JSX for rendering the Chatbot component
@@ -308,6 +315,8 @@ const Chatbot = () => {
         {isTyping ? <img src={Dots} className="dots" alt="Dots" /> : null}
 
         <div className="messages-display-container" >
+
+
           <div>
             {/* Render CardComponent with BeeDetails data */}
             {displayBeeCards && (
@@ -315,6 +324,8 @@ const Chatbot = () => {
                 <CardComponent
                   details={BeeDetails}
                   onClick={handleCardClick}
+                  onDetailsClick={moreBeeDetailsButton}
+
                 />
               </div>
             )}
@@ -327,6 +338,9 @@ const Chatbot = () => {
             )}
 
           </div>
+
+
+
           {/* Render the current typing message */}
           {message.trim() !== '' && (
             <div className="new-message-container" ref={lastMessageRef} style={{ maxWidth: `${message.length * 9.85}px` }}>
@@ -362,22 +376,8 @@ const Chatbot = () => {
                 );
               }
             })}
-          {/* Overlay for detailed bee description */}
-          {isOverlayOpen && selectedBee && (
-            <div className="overlay" onClick={closeOverlay}>
-              <div className="overlay-content">
-                <img src={selectedBee.image} alt={selectedBee.type} />
-                <h2>{selectedBee.type}</h2>
-                {/* <p>{selectedBee.description}</p> */}
-              </div>
-            </div>
-          )}
-
 
         </div>
-
-
-
       </div>
 
       <div>

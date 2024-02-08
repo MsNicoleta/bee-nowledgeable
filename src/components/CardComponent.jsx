@@ -7,12 +7,14 @@ import CardComponentStyle from '../Styles/CardComponentStyle.css';
 import React from 'react';
 
 const CardComponent = (props) => {
+  const { details, onClick } = props;
+
   return (
     <>
       <div className='card-container'>
-        {props.details ? (
-          props.details.map((value, index) => (
-            <div className="the-card" key={index} onClick={() => props.onClick(index)}>
+        {details ? (
+          details.map((value, index) => (
+            <div className="the-card" key={index} onClick={() => onClick(index)}>
               <div className="card-image">
                 <img src={value.img} alt={value.title} />
               </div>
@@ -22,8 +24,6 @@ const CardComponent = (props) => {
                 {/* Additional content based on your needs */}
                 <div className="button-card">
                   <div href={value.detailsLink} className="more-button">
-                    {/* <div href="#" className="more-button" onClick={() => props.onClick(overlayBeeDetails)}> */}
-
                     More
                   </div>
                 </div>
@@ -33,7 +33,6 @@ const CardComponent = (props) => {
         ) : null}
       </div>
     </>
-
   );
 };
 

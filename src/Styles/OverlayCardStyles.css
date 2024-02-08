@@ -37,7 +37,6 @@
 
 /* Overlay image */
 .overlay-card .card-image img {
-  height: auto;
   border-radius: 20px;
 }
 
@@ -89,4 +88,11 @@
 /* Hover effect for the close button */
 .overlay-card .close-button:hover {
   background-color: #ffb95e;
+}
+
+.overlay-card .img {
+  object-fit: cover;
+  /* Ensures the image covers the area without being stretched */
+  width: 100%;
+  height: 100%;
 }
