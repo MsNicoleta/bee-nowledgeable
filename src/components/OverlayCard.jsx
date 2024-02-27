@@ -10,7 +10,6 @@ const BeeOverlayCard = ({ overlayBeeDetails, closeOverlay, overlayBeeDetailsArra
   return (
     <div className="overlay">
       <div className="overlay-card">
-        <button className="close-button" onClick={closeOverlay}>❌</button>
         <div className="overlay-content">
           <div className="overlay-image">
             <img src={img} alt={title} />
@@ -20,6 +19,7 @@ const BeeOverlayCard = ({ overlayBeeDetails, closeOverlay, overlayBeeDetailsArra
             <p className="overlay-description">{description}</p>
             {/* Additional content */}
           </div>
+          <button className="close-button" onClick={closeOverlay}>❌</button>
         </div>
       </div>
     </div>
