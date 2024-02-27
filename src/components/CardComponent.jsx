@@ -24,7 +24,7 @@ const CardComponent = (props) => {
                 <h3 className="title-card">{value.title}</h3>
                 <p className="description">{value.description}</p>
                 {/* Additional content based on your needs */}
-                <div className="button-card">
+                <div className="button-card-div">
                   <div className="more-button" onClick={() => onDetailsClick(OverlayBeeDetails[index])}>
                     More
                   </div>

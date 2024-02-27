@@ -378,9 +378,12 @@ const Chatbot = () => {
         ) : (
 
           // Render the button with the combined click handler
-          <button className="next-message-button" onClick={handleNextButtonClick}>
-            Next
-          </button>
+          <div className='button-div'>
+            <button className="next-message-button" onClick={handleNextButtonClick}>
+              Next
+            </button>
+          </div>
+
         )}
       </div>
     </div>

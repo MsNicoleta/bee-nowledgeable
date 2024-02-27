@@ -25,6 +25,14 @@
    position: inherit;
  }
 
+ .button-card-div {
+
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+ }
+
  .more-button {
    background-color: #AD6202;
    color: aliceblue;
@@ -35,8 +43,8 @@
    padding: 0.5rem;
    text-decoration: none;
    width: 30%;
-   align-self: center;
    margin-bottom: 1rem;
+   text-align: center;
 
    font-family: 'Fredoka', sans-serif;
    font-weight: 500;
@@ -52,7 +60,7 @@
  }
 
  .title-card {
-
+   text-align: center;
    padding-top: 1rem;
    font-weight: bold;
    font-size: 1.5rem;

@@ -52,6 +52,7 @@
 
  /* Overlay card title */
  .overlay-card .overlay-title {
+   text-align: center;
    margin-top: 1rem;
    font-size: 2rem;
    /* Larger font size for title */
