@@ -12,7 +12,7 @@ const BeeDetails = [
   {
     img: Bumblebees,
     title: 'Bumblebees',
-    description: 'Bumblebees are robust, fuzzy bees known for their distinctive black and yellow stripes. '
+    description: 'Bumblebees are robust, fuzzy bees known for their distinctive black and yellow stripes.'
   },
   {
     img: MiningBees,
@@ -27,7 +27,7 @@ const BeeDetails = [
   {
     img: Bumblebees,
     title: 'Bumblebees',
-    description: 'Bumblebees are robust, fuzzy bees known for their distinctive black and yellow stripes. ',
+    description: 'Bumblebees are robust, fuzzy bees known for their distinctive black and yellow stripes.',
   },
   {
     img: MiningBees,

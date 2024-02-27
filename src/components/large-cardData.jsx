@@ -8,7 +8,14 @@ const OverlayBeeDetails = [
   {
     img: Honeybees,
     title: 'Honeybees',
-    description: '🐝 Honeybees are social insects that live in colonies, with each colony consisting of a queen, worker bees, and drones.🌸 Pollination Power: Honeybees are essential pollinators, contributing to the reproduction of flowers, fruits, and vegetables.About one - third of the food we eat depends on pollination, and honeybees play a significant role in this process.🍯 Sweet Rewards: Bees produce honey by collecting nectar from flowers, which they then transform into honey through a process of regurgitation and evaporation.A single hive can produce anywhere from 30 to 100 pounds of honey each year.🌎 Global Citizens: Honeybees are found all over the world, adapting to various climates and environments.There are several species of honeybees, with the Western honeybee(Apis mellifera) being the most commonly managed for honey production.👭 Team Players: In a hive, worker bees perform various tasks such as foraging, nursing, and hive maintenance.They work together with remarkable teamwork to ensure the survival and success of the colony.📈 Concerning Decline: Unfortunately, honeybee populations have been facing challenges such as habitat loss, pesticide exposure, and diseases, leading to a decline in their numbers.Conservation efforts and raising awareness about the importance of bees are crucial to their well - being and our ecosystem.',
+    description: [
+      '🐝 Honeybees are social insects that live in colonies, with each colony consisting of a queen, worker bees, and drones.',
+      '🌸 Pollination Power: Honeybees are essential pollinators, contributing to the reproduction of flowers, fruits, and vegetables. About one-third of the food we eat depends on pollination, and honeybees play a significant role in this process.',
+      '🍯 Sweet Rewards: Bees produce honey by collecting nectar from flowers, which they then transform into honey through a process of regurgitation and evaporation. A single hive can produce anywhere from 30 to 100 pounds of honey each year.',
+      '🌍 Global Citizens: Honeybees are found all over the world, adapting to various climates and environments. There are several species of honeybees, with the Western honeybee(Apis mellifera) being the most commonly managed for honey production.',
+      '👭 Team Players: In a hive, worker bees perform various tasks such as foraging, nursing, and hive maintenance. They work together with remarkable teamwork to ensure the survival and success of the colony.',
+      '📈 Concerning Decline: Unfortunately, honeybee populations have been facing challenges such as habitat loss, pesticide exposure, and diseases, leading to a decline in their numbers. Conservation efforts and raising awareness about the importance of bees are crucial to their well-being and our ecosystem.'
+    ]
   },
   {
     img: Bumblebees,

@@ -1,98 +1,109 @@
-/* Overlay card styles */
+ @import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600&display=swap');
 
-/* Overlay background */
-.overlay-background {
-  position: fixed;
-  /* Overlay takes the whole screen */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  /* Semi-transparent background */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  /* Ensures the overlay is above other content */
-}
+ /* Overlay card styles */
 
-/* Overlay card */
-.overlay-card {
-  background: #F9F2DD;
-  border-radius: 20px;
-  padding: 2rem;
-  width: 90%;
-  margin-top: 8rem;
-  /* Adjust width as needed */
-  max-width: 70rem;
-  height: 35rem;
-  /* Maximum width */
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  z-index: 1001;
-  /* Ensures the card is above the overlay background */
-}
+ /* Overlay background */
+ .overlay-background {
+   position: fixed;
+   /* Overlay takes the whole screen */
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background-color: rgba(0, 0, 0, 0.5);
+   /* Semi-transparent background */
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   z-index: 1000;
+   /* Ensures the overlay is above other content */
+ }
 
-/* Overlay image */
-.overlay-card .card-image img {
-  border-radius: 20px;
-}
+ /* Overlay card */
+ .overlay-card {
+   background: #F9F2DD;
+   border-radius: 15px;
+   padding: 0.5rem;
+   width: 90%;
+   margin-top: 8rem;
+   /* Adjust width as needed */
+   max-width: 70rem;
+   /* Maximum width */
+   display: flex;
+   flex-direction: column;
+   position: relative;
+   z-index: 1001;
+   /* Ensures the card is above the overlay background */
+ }
 
-/* Overlay card content */
-.overlay-card .card-content {
+
+
+ /* Overlay image */
+ .overlay-card .overlay-image img {
+   border-radius: 9px;
+   width: 15rem;
+   height: 32rem;
+   object-fit: cover;
+   /* Ensures the image covers the area without being stretched */
+
+ }
+
+ /* Overlay card content */
+ /* .overlay-card .card-content {
   padding: 1rem;
-}
+} */
 
-/* Overlay card title */
-.overlay-card .title-card {
-  margin-top: 1rem;
-  font-size: 2rem;
-  /* Larger font size for title */
-}
+ /* Overlay card title */
+ .overlay-card .overlay-title {
+   margin-top: 1rem;
+   font-size: 2rem;
+   /* Larger font size for title */
+ }
 
-/* Overlay card description */
-.overlay-card .description {
-  margin-top: 1rem;
-  font-size: 1rem;
-  /* Adjust font size as needed */
-  color: #39170F;
-  line-height: 1.5;
-  /* Increased line height for readability */
-}
+ /* Overlay card description */
+ .overlay-card .overlay-description {
+   margin-top: 2rem;
+   font-size: 1rem;
+   /* Adjust font size as needed */
+   color: #39170F;
+   font-family: 'Fredoka', sans-serif;
+   font-weight: 500;
+   line-height: 1.5;
+   /* Increased line height for readability */
+ }
 
-/* Overlay card button */
-.overlay-card .more-button {
-  margin-top: 2rem;
-  /* Space above the button */
-  width: 50%;
-  /* Wider button for better interaction */
-  align-self: center;
-  /* Center the button */
-}
+ Overlay card button .overlay-card .more-button {
+   margin-top: 2rem;
+   /* Space above the button */
+   width: 50%;
+   /* Wider button for better interaction */
+   align-self: center;
+   /* Center the button */
+ }
 
-/* Close button for overlay */
-.overlay-card .close-button {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: #F9F2DD;
-  /* color: #fff; */
-  border: none;
-  border-radius: 10px;
-  padding: 0.5rem;
-  cursor: pointer;
-}
+ /* Close button for overlay */
+ .overlay-card .close-button {
+   position: absolute;
+   top: 1rem;
+   right: 1rem;
+   background: #F9F2DD;
+   /* color: #fff; */
+   border: none;
+   border-radius: 10px;
+   padding: 0.5rem;
+   cursor: pointer;
+ }
 
-/* Hover effect for the close button */
-.overlay-card .close-button:hover {
-  background-color: #ffb95e;
-}
+ /* Hover effect for the close button */
+ .overlay-card .close-button:hover {
+   background-color: #ffb95e;
+ }
 
-.overlay-card .img {
-  object-fit: cover;
-  /* Ensures the image covers the area without being stretched */
-  width: 100%;
-  height: 100%;
-}
+
+
+ .overlay-content {
+   display: flex;
+
+
+
+ }

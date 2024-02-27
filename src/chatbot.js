@@ -247,6 +247,10 @@ const Chatbot = () => {
     setIsOverlayOpen(true);
     // setOverlayBeeDetails(OverlayBeeDetails); // Pass the OverlayBeeDetails array as a prop
   };
+  const moreBeeDetailsButton = (overlayBeeDetails) => {
+    setSelectedBee(overlayBeeDetails);
+    setIsOverlayOpen(true);
+  };
 
 
   // // define a function to close the overlay
@@ -287,25 +291,7 @@ const Chatbot = () => {
     }
   };
 
-  // const handleNextButtonClick = () => {
-  //   // Check if all the messages are displayed
-  //   if (index === messageList.length - 1) {
-  //     // If all the messages are displayed, display the bee-cards-container
-  //     setDisplayBeeCards(true);
-  //   }
 
-  //   // Pass the correct index to handleCardClick function
-  //   handleCardClick(index - 3); // Subtract 3 to get the correct index for BeeDetails
-  //   handleClick(); // Call handleClick function
-  // };
-  const handleNextBeeButtonClick = () => {
-    setSelectedBeeIndex((prevIndex) => (prevIndex + 1) % BeeDetails.length);
-  };
-
-  const moreBeeDetailsButton = (overlayBeeDetails) => {
-    setSelectedBee(overlayBeeDetails);
-    setIsOverlayOpen(true);
-  };
 
 
 

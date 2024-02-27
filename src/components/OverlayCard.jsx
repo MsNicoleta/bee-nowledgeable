@@ -12,12 +12,14 @@ const BeeOverlayCard = ({ overlayBeeDetails, closeOverlay, overlayBeeDetailsArra
       <div className="overlay-card">
         <button className="close-button" onClick={closeOverlay}>❌</button>
         <div className="overlay-content">
-          <div className="card-image">
+          <div className="overlay-image">
             <img src={img} alt={title} />
           </div>
-          <h3 className="title">{title}</h3>
-          <p className="description">{description}</p>
-          {/* Additional content */}
+          <div className='overlay-details'>
+            <h3 className="overlay-title">{title}</h3>
+            <p className="overlay-description">{description}</p>
+            {/* Additional content */}
+          </div>
         </div>
       </div>
     </div>
