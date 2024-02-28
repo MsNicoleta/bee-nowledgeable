@@ -38,7 +38,7 @@
  /* Overlay image */
  .overlay-card .overlay-image img {
    border-radius: 9px;
-   width: 15rem;
+   width: 20rem;
    height: 32rem;
    object-fit: cover;
    /* Ensures the image covers the area without being stretched */
@@ -60,14 +60,14 @@
 
  /* Overlay card description */
  .overlay-card .overlay-description {
-   margin-top: 1rem;
-   font-size: 1rem;
+   margin: 0;
+   font-size: 0.9rem;
    /* Adjust font size as needed */
    color: #39170F;
    font-family: 'Fredoka', sans-serif;
    font-weight: 500;
    line-height: 1.5;
-   padding: 2rem;
+   padding: 0rem 2rem 0rem 2rem;
    /* Increased line height for readability */
  }
 

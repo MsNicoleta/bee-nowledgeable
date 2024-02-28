@@ -1,7 +1,6 @@
 import React from 'react';
 import OverlayCardStyle from '../Styles/OverlayCardStyles.css';
 
-
 const BeeOverlayCard = ({ overlayBeeDetails, closeOverlay, overlayBeeDetailsArray }) => {
   if (!overlayBeeDetails) return null;
 
@@ -16,7 +15,11 @@ const BeeOverlayCard = ({ overlayBeeDetails, closeOverlay, overlayBeeDetailsArra
           </div>
           <div className='overlay-details'>
             <h3 className="overlay-title">{title}</h3>
-            <p className="overlay-description">{description}</p>
+            <div className="overlay-description">
+              {description.map((sentence, index) => (
+                <p key={index}>{sentence}</p>
+              ))}
+            </div>
             {/* Additional content */}
           </div>
           <button className="close-button" onClick={closeOverlay}>❌</button>
