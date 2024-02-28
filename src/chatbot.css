@@ -104,10 +104,10 @@
 
 .messages-display-container {
   position: relative !important;
-  top: 2rem;
+  /* top: 2rem; */
   margin-left: 20rem;
   z-index: 0;
-  height: 37rem !important;
+  height: 40rem !important;
   overflow-y: auto;
   display: flex;
   flex-direction: column-reverse;
@@ -175,7 +175,7 @@ video {
   /* Increased z-index */
   position: relative;
   /* Ensure it's positioned */
-  margin-top: 5rem;
+  margin-top: 1rem;
   cursor: pointer;
   border: none !important;
   font-family: 'Fredoka', sans-serif;

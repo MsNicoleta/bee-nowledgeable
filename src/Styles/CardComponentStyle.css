@@ -96,7 +96,7 @@
 
  }
 
- .card-container {
+ .card-wrapper {
    display: flex;
    flex-wrap: wrap;
    width: 85%;
@@ -120,11 +120,20 @@
    }
  }
 
- .bee-cards-container {
 
+
+ .bee-cards-container {
    display: flex;
-   justify-content: start;
-   width: 75%;
+   justify-content: center;
+   /* Added */
    height: 50%;
    bottom: 0;
+   padding: 3rem;
+ }
+
+ .bee-cards {
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   /* Added */
  }

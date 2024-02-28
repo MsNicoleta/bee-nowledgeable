@@ -13,7 +13,7 @@ const CardComponent = (props) => {
 
   return (
     <>
-      <div className='card-container'>
+      <div className='card-wrapper'>
         {details ? (
           details.map((value, index) => (
             <div className="the-card" key={index}>
