@@ -11,6 +11,8 @@
    border-radius: 20px;
    display: flex;
    flex-direction: column;
+   text-align: center;
+
 
    margin: 0.5%;
    /* Adjusted for spacing between cards */
@@ -69,9 +71,11 @@
 
  }
 
- /* .body-card {
-   padding: 1rem;
- } */
+ .body-card {
+
+   align-items: center;
+   justify-self: center;
+ }
 
  .button-card {
 
@@ -84,7 +88,8 @@
    margin-top: 1rem;
    /* Adjusted for spacing */
    /* Adjusted for spacing */
-   height: 5em;
+   text-align: center;
+   height: 8em;
    font-size: 1rem;
    color: #39170F;
    font-family: 'Fredoka', sans-serif;
@@ -100,7 +105,9 @@
    display: flex;
    justify-content: center;
    flex-wrap: wrap;
-   width: 65%;
+   width: 75%;
+   z-index: 100 !important;
+
 
    /* justify-content: center; */
  }
@@ -133,15 +140,11 @@
    justify-content: center;
    /* Added */
 
-   z-index: 100 !important;
 
    /* Added */
  }
 
  .bee-cards {
-
-
-
 
    display: block;
 
